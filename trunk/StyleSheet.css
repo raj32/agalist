@@ -1,0 +1,862 @@
+﻿/*@media only screen and (max-device-width: 960px) {
+  
+.body
+{
+    width: 100%;   
+}
+
+.HeaderDiv
+{
+    
+    height:100px;
+    margin: 0 auto;
+    
+}
+
+.HeaderLeftDiv
+{ 
+    width:400px;
+    float:left;
+    height:100px; 
+    padding-top:20px;
+    direction:rtl;
+    
+}
+
+.LoginDiv
+{
+    margin: 30px 0px 0px 0px;
+    direction:rtl;
+    float:right;
+    width:400px;
+    height:200px;     
+}
+
+#tbxEmail
+{
+    width:200px; 
+}
+
+.iPhoneLogin
+{
+    width:200px; 
+    background-color:Red;    
+}
+
+.LoginWatermark
+{
+    color: Gray;
+     
+}
+
+.HeaderCenterDiv
+{
+    display:none; 
+    width:400px;
+    float:left;
+    height:120px; 
+    font-size: 42px;     
+    text-align:right;
+    color:#124a71;
+}
+
+.HeaderRightDiv
+{
+    display:none; 
+    float:left;
+    height:120px; 
+    width:7px;
+}
+
+.FooterDiv
+{
+    display:none; 
+    width:800px;
+    bottom:0px auto;
+    height: 50px; 
+    font-size: xx-large; 
+    color: White;
+    padding-top:10px;            
+}
+
+.mainPageTabs
+{
+    display:none; 
+    float:right; 
+    direction:rtl; 
+    background:red;
+    
+}
+
+#UpdatePanel1
+{
+    display:none;
+}
+
+ .MainPagePicDiv
+ {
+     display:none; 
+     width:640px;
+ }
+ 
+ 
+
+.CentralPanelDiv
+{    
+    display:none;
+    min-height:450px;   
+    margin: 0 auto;
+    width:100%;    
+}
+
+.InsideCenterDiv
+{
+    display:none;
+    width:100%;
+    background:green;
+    
+    
+}
+
+.RightOfCenterPageDiv
+{
+    float:left;
+    width:184px;
+   
+}
+
+.CenterOfCenterPageDiv
+{
+    display:none;
+    float:left;
+    text-align:center;
+    width:560px;
+    height:inherit;
+}
+
+.CenterPanelTextDiv
+{
+    display:none;
+    background:white; 
+    width:62%; 
+    float:right;  
+    text-align:right; 
+    direction:rtl; 
+    margin-top:-10px;
+    color:#898888;
+}
+
+.MasterPageLoginViewDiv
+{
+     display:none;   
+}
+
+.CenterPanelPicDiv
+{
+    display:none;
+    width: 38%; 
+    float:right; 
+    height:200px;
+}
+
+.TipsDiv
+{
+    height:inherit;
+    background-color:white;
+    padding-left:10px;
+    
+}
+
+.tabCompensateDiv
+{
+    display:none;    
+}
+
+
+.LeftTopYellow
+{
+    display:none;
+    width:10px;
+    height:25px;
+    background: #fff url(images/YellowTopLeft.bmp) no-repeat;    
+    float:left;
+}
+
+.RightTopYellow
+{
+    display:none;
+    height:25px;
+    width:10px;
+    background: #fff url(images/YellowTopRight.bmp) no-repeat;
+    float:left;
+}
+
+.LeftBottomWhite
+{
+    display:none;
+    width:10px;
+    height:36px;
+    background: #fff url(images/WhiteBottomLeft.bmp) no-repeat;  
+    float:left;
+}
+
+
+.RightBottomWhite
+{
+    display:none;
+    height:36px;
+    width:10px;
+    background: #fff url(images/WhiteBottomRight.bmp) no-repeat;
+    float:left;
+}
+
+
+
+
+.CenterTopYellowLoginDiv
+{
+    display:none;
+    width:164px;
+    height:25px;
+    background: #fff url(images/YellowUpLine1px.bmp) repeat;
+    float:left;
+    
+    text-align:right;
+}
+
+.CenterBottomWhiteLoginDiv
+{
+    display:none;
+    width:164px;
+    height:36px;
+    background-color:White;
+    float:left;
+}
+
+
+.TipsDiv .p1
+{
+    display:none;
+    direction:rtl;
+    text-align:right;
+    font-size: 12px;
+    color:#F96C05;
+    margin-right:20px;
+    margin-left:15px;
+}
+
+
+.CenterTopYellowMainDiv
+{
+    display:none;
+    width:550px;
+    height:25px;
+    background: #fff url(images/YellowUpLine1px.bmp) repeat;
+    float:left;
+}
+
+.CenterBottomWhiteMainDiv
+{
+    display:none;
+    width:550px;
+    height:36px;
+    background-color:White;
+    float:left;
+}
+
+
+.CentralMainDiv
+{
+    display:none;
+    background-color:White;
+    padding:3px;
+    padding-left:10px;
+    
+}
+
+
+
+
+#VersionDiv
+{
+
+}
+
+.LoginGroupDiv
+{
+    height: 25px;  
+    padding-right: 3%;
+    width: 45%;  
+    background-color:white;
+}
+
+.LoginGroupErrorMessageDiv
+{
+    height: 85px;  
+    padding-right: 3%;
+    width: 97%;  
+    background-color:White;
+}
+
+.RegisterGroupDiv
+{
+    height: 25px;
+    padding: 3px;
+    width: 30%;   
+    margin-left: 5px;
+    text-align: right;  
+    float: right;
+}
+
+.RegisterGroupDivEdge
+{
+    float:right;
+    padding: 3px;
+    height: 25px;
+    width: 30%;    
+    margin-left:5px;
+    text-align: right;  
+    
+}
+
+.FullLengthDiv
+{       
+    padding: 3px;
+    height: 25px;
+    width: 90%;        
+    text-align: right;  
+   
+}
+
+.FindProductAutoCompleteExtender
+{ 
+    
+    visibility : hidden;
+    margin : 0px;
+    background-color : inherit;
+    color : black;
+    border : solid 1px gray;
+    cursor : pointer;
+    text-align:right;
+    list-style-type : none;
+    font-family : Verdana;
+    font-size: 14px;
+    padding : 0;     
+}
+
+#FindProductDiv
+{
+    position: relative; 
+    width: 100%;     
+    float: right; 
+    background-color:White; 
+    z-index: 3;
+}
+
+.NewProductDiv
+{
+    z-index: 4; 
+    background-color: #286995;    
+    top: inherit;
+    width: 400px; 
+    position: absolute; 
+    left: 22%; 
+    top: 120px;
+    border:2px solid #003300;
+    padding-bottom:10px;
+}
+
+.errorsdiv
+{
+    z-index: 4; 
+    background-color: #BDA8AC; 
+    top: inherit;
+    width: 300px; 
+    position: absolute; 
+    left: 40%; 
+    top: 110px;
+    border-style:solid;
+    border-color: Red;
+}
+
+.quantityResizer
+{
+    width:45px;    
+    text-align:center;
+}
+
+
+.BtnClass
+{
+    font-family:Sans-Serif;
+    Color:#1d6ca3;
+    font-weight:bolder; 
+    background:#FF9900;
+    border-style:Ridge;
+    Width:80px;
+    Height:30px;
+}
+
+
+.WelcomeMenu
+{
+     
+     background:white;
+     direction:rtl;
+}
+
+  
+}
+
+/*
+* End of iPhone part
+*
+*/
+
+body 
+{
+    background-image: url(images/FullBackground.jpg);
+     background-color: #286995;
+    background-repeat:no-repeat;
+    background-position:center top;
+   
+    margin:0px 0px 0px 0px;
+    padding:0;
+    font-family:  sans-serif,Arial,Helvetica;
+	font-size: 16px;
+
+}
+
+.MainPageDiv 
+{
+    
+  position:inherit;
+  top:50px;
+    margin: 0 auto;
+    padding:0;
+    width: 800px;
+    
+   
+}
+
+.HeaderDiv
+{
+    height:100px;
+    margin: 0 auto;
+    
+}
+
+.HeaderLeftDiv
+{    
+    width:520px;
+    float:left;
+    height:100px; 
+    padding-top:20px;
+    direction:rtl;
+    
+}
+
+
+
+.LoginDiv
+{
+    margin: 30px 0px 0px 0px;
+    direction:rtl;
+    float:right;
+}
+
+.LoginWatermark
+{
+    color: Gray;
+     
+}
+
+.MasterPageLoginViewDiv
+{
+    position:absolute; 
+    top:110px; 
+    left:22%;  
+    color:White;    
+    
+}
+
+.HeaderCenterDiv
+{
+    width:265px;
+    float:left;
+    height:120px; 
+    font-size: 42px;     
+    text-align:right;
+    color:#124a71;
+}
+
+.HeaderRightDiv
+{
+    float:left;
+    height:120px; 
+    width:7px;
+}
+
+.FooterDiv
+{
+    width:760px;
+    height: 50px; 
+    font-size: xx-large; 
+    color: White;
+    margin:0 auto;        
+}
+
+ .MainPagePicDiv
+ {
+
+ }
+ 
+ 
+
+.CentralPanelDiv
+{    
+    
+    min-height:450px;   
+    margin: 0 auto;
+    width:800px;    
+}
+
+.mainPageTabs
+{
+    float:right; 
+    direction:rtl; 
+    background:white;
+    
+}
+
+.tabCompensateDiv
+{
+    width:468px; 
+    height:60px; 
+    float:right; 
+    background-color:#D4DAE3;
+}
+
+
+.InsideCenterDiv
+{
+    width:750px;
+    background:white;
+    
+    
+}
+
+.RightOfCenterPageDiv
+{
+    float:left;
+    width:184px;
+   
+}
+
+.CenterOfCenterPageDiv
+{
+    float:left;
+    text-align:center;
+    width:560px;
+    height:inherit;
+}
+
+.CenterPanelTextDiv
+{
+    background:white; 
+    width:60%; 
+    float:right;  
+    text-align:right; 
+    direction:rtl; 
+    margin-top:-10px;
+    margin-right:10px;
+    color:#898888;
+}
+
+.AboutTextDiv
+{
+    background:white; 
+    width:52%; 
+    float:right;  
+    text-align:right; 
+    direction:rtl; 
+    margin-top:-10px;
+    margin-right:-20px;
+    color:#898888;
+}
+
+.CenterPanelPicDiv
+{
+    width: 35%; 
+    float:right; 
+    height:200px;
+    margin-right:10px;
+}
+
+.TipsDiv
+{
+    height:inherit;
+    background-color:white;
+    padding-left:10px;
+    
+}
+
+
+.LeftTopYellow
+{
+    width:10px;
+    height:25px;
+    background: #fff url(images/YellowTopLeft.bmp) no-repeat;    
+    float:left;
+}
+
+.RightTopYellow
+{
+    height:25px;
+    width:10px;
+    background: #fff url(images/YellowTopRight.bmp) no-repeat;
+    float:left;
+}
+
+.LeftBottomWhite
+{
+    width:10px;
+    height:36px;
+    background: #fff url(images/WhiteBottomLeft.bmp) no-repeat;  
+    float:left;
+}
+
+
+.RightBottomWhite
+{
+    height:36px;
+    width:10px;
+    background: #fff url(images/WhiteBottomRight.bmp) no-repeat;
+    float:left;
+}
+
+
+
+.CenterTopYellowLoginDiv
+{
+    width:164px;
+    height:25px;
+    background: #fff url(images/YellowUpLine1px.bmp) repeat;
+    float:left;
+    
+    text-align:right;
+}
+
+.CenterBottomWhiteLoginDiv
+{
+    width:164px;
+    height:36px;
+    background-color:White;
+    float:left;
+}
+
+
+.ParTips
+{
+    direction:rtl;
+    text-align:right;
+    font-size: 12px;
+    color:#F96C05;
+    margin-right:20px;
+    margin-left:15px;
+}
+
+
+.CenterTopYellowMainDiv
+{
+    width:550px;
+    height:25px;
+    background: #fff url(images/YellowUpLine1px.bmp) repeat;
+    float:left;
+}
+
+.CenterBottomWhiteMainDiv
+{
+    width:450px;
+    height:70px;
+    background-color:white;
+    float:left;
+    direction:rtl;
+}
+
+
+.CentralMainDiv
+{
+    direction:rtl; 
+    float:left;
+    width:760px;
+    height: 300px;
+    background-color:White;
+    padding-top:30px;
+}
+
+
+.ListClass
+{
+    Width:147px;
+    Height:200px;
+    margin-right : 18px;
+    border :1px solid white;
+     direction:rtl;
+    text-align:right;
+    font-size: 13px;
+    margin-top:5px;
+    
+    
+}
+
+.BasketHandling
+{
+    margin-right:20px;
+}
+
+#VersionDiv
+{
+
+}
+
+.LoginGroupDiv
+{
+    height: 25px;  
+    padding-right: 3%;
+    width: 45%;  
+    background-color:white;
+}
+
+.LoginGroupErrorMessageDiv
+{
+    height: 85px;  
+    padding-right: 3%;
+    width: 97%;  
+    background-color:White;
+}
+
+.RegisterGroupDiv
+{
+    height: 25px;
+    padding: 3px;
+    width: 159px;   
+    text-align: right;  
+    float: right;
+}
+
+.RegisterGroupDivEdge
+{
+    float:right;
+    padding: 3px;
+    height: 25px;
+    width: 85px;    
+    margin-right:20px;
+    text-align: right;  
+    
+}
+
+.FullLengthDiv
+{
+   
+    padding: 3px;
+    height: 25px;
+    width: 90%;        
+    text-align: right;  
+   
+}
+
+.FindProductAutoCompleteExtender
+{ 
+    
+    visibility : hidden;
+    margin : 0px;
+    background-color : inherit;
+    color : black;
+    border : solid 1px gray;
+    cursor : pointer;
+    text-align:right;
+    list-style-type : none;
+    font-family : Verdana;
+    font-size: 14px;
+    padding : 0;     
+}
+
+#FindProductDiv
+{
+    text-align:right;
+    width: 600px;     
+    float: left; 
+    background-color:white; 
+    z-index: 3;
+}
+
+#FindProductDefDiv
+{
+    text-align:right;
+    width: 550px;     
+    float: left; 
+    background-color:white; 
+    z-index: 3;
+}
+
+
+.NewProductDiv
+{
+    z-index: 4; 
+    background-color: #286995;    
+    top: inherit;
+    width: 400px; 
+    position: absolute; 
+    left: 38%; 
+    top: 200px;
+    border:2px solid #003300;
+    padding-bottom:10px;
+}
+
+.errorsdiv
+{
+    z-index: 4; 
+    background-color: #BDA8AC; 
+    top: inherit;
+    width: 300px; 
+    position: absolute; 
+    left: 40%; 
+    top: 110px;
+    border-style:solid;
+    border-color: Red;
+}
+
+.quantityResizer
+{
+    width:45px;    
+    text-align:center;
+}
+
+
+.BtnClass
+{
+    font-family:Sans-Serif;
+    Color:#1d6ca3;
+    font-weight:bolder; 
+    background:#FF9900;
+    border-style:Ridge;    
+    Width:80px ;
+    Height:24px;
+}
+
+
+.WelcomeMenu
+{
+     
+     text-align:center;
+     direction:rtl;
+     font-weight:bolder;
+    
+
+}
+
+.tabMenuItem
+{
+    
+}
