@@ -97,16 +97,14 @@ namespace ProductListDBModel
 
         static String allTips()
         {
-            //String[] lclAllTips =  (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b.tip_content).ToArray<String>();
+            String[] lclAllTips =  (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b.tip_content).ToArray<String>();
             String returnValue = "";
 
-            //for (int i = 0; i < lclAllTips.Length; i++)
-            //{
-            //    returnValue += lclAllTips[i] + "<br><br><br>";
+            for (int i = 0; i < lclAllTips.Length; i++)
+            {
+                returnValue += lclAllTips[i] + "<br><br><br>";
                 
-            //}
-            //return returnValue;
-            returnValue = "על מנת לא להתפתות לקנות מוצרים שאין בהם צורך, מומלץ להגיע לסופר עם רשימה מוכנה מראש" + "<br><br><br>" + "במדפים התחתונים של הסופר תמצאו את אותם המוצרים במחיר נמוך יותר וזאת מכיוון שהסופר ממקם את המוצרים הרווחיים ביותר בגובה העיניים" + "<br><br><br>" + " מומלץ לא להגיע לחנות רעבים. כשאנחנו רעבים אנחנו קונים יותר" + "<br><br><br>" + " ילדים נוטים לשים בעגלה מוצרים שלא התכוונו לקנות. שתפו את הילדים בתהליך והציעו להם לעזור לכם למצוא מוצרים מהרשימה" + "<br><br><br>" + "הכינו רשימת קניות לשבוע שלם. הדבר יחסוך ביקורים מיותרים בסופר, קניית עודפי מוצרים והכי חשוב זמן יקר" + "<br><br><br>";
+            }
             return returnValue;
         }
 

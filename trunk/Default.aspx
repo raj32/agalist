@@ -186,11 +186,12 @@
                                         <div style="clear: both;">&nbsp</div>
                                         <marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="1" onmouseover="stop()" onmouseout="start()"> 
                                             <div class = "ParTips">
-                                                  <%=ProductListDBModel.DBUtils.getAllTips%>  
+                                                  <a href="TipsPage.aspx" class = "ParTips"> <%=ProductListDBModel.DBUtils.getAllTips%>  </a>
                                             </div>
                                         </marquee>
-                                    <!--    <asp:HyperLink ID="lnkAddNewTips" runat="server" NavigateUrl="~/TipsPage.aspx"> להוספת טיפ חדש </asp:HyperLink> -->
-                                        
+                                        <div class = "ParTips" style="padding-top:15px;">
+                                            <asp:HyperLink ID="lnkAddNewTips" runat="server" NavigateUrl="~/TipsPage.aspx" class = "AddTipLink"> להוספת טיפ לחץ כאן</asp:HyperLink> 
+                                        </div>
                                     </div> 
                                     <!-------TipsDiv------->
 
