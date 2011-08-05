@@ -518,7 +518,8 @@ body
     
     min-height:450px;   
     margin: 0 auto;
-    width:800px;    
+    width:800px;   
+     
 }
 
 .mainPageTabs
@@ -868,5 +869,25 @@ body
 
 .tabMenuItem
 {
+    
+}
+
+.nameTip
+{
+    margin-left:20px;
+    margin-right:20px;
+    text-align:right;
+    color:#1d6ca3;
+    border-bottom:3px solid #1d6ca3;
+}
+
+.contentTip
+{
+    margin-left:20px;
+    margin-right:120px;
+    color:#F96C05;
+    border-bottom:3px solid #1d6ca3;
+    border-left:3px solid #1d6ca3;
+    border-right:3px solid #1d6ca3;
     
 }

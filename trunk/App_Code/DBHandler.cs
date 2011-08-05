@@ -97,14 +97,52 @@ namespace ProductListDBModel
 
         static String allTips()
         {
-            String[] lclAllTips =  (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b.tip_content).ToArray<String>();
+            
+            List<Tip> lclAllTips = (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b).ToList<Tip>();
             String returnValue = "";
 
-            for (int i = 0; i < lclAllTips.Length; i++)
+            foreach (var item in lclAllTips)
             {
-                returnValue += lclAllTips[i] + "<br><br><br>";
-                
+
+                returnValue += item.tip_content + "<br><br><br>";
             }
+
+            return returnValue;
+        }
+
+        public static String getAllTipsForScr
+        {
+            get
+            {
+                return allTipsForScr();
+            }
+
+        }
+
+        static String allTipsForScr()
+        {
+
+            List<Tip> lclAllTips = (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b).ToList<Tip>();
+
+            //String[] lclAllTips =  (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b.tip_content).ToArray<String>();
+            String returnValue = "";
+
+            int i = 0;
+
+            foreach (var item in lclAllTips)
+            {
+                i++;
+
+                if (i==2)
+                {
+                    returnValue += "<div class=\" nameTip\">" + "הטיפ של " + "Agalist" + "<br> </div>" +
+                                "<div class=\" contentTip\">" + "מומלץ לקרוא על חסכון בכל תחומי החיים. באתר זה תקראו איך " +
+                                "<a href=\"http://www.save4u.co.il\"> פשוט לשלם פחות </a>  " + "</div> <br><br>";
+                }
+                returnValue += "<div class=\" nameTip\">" + "הטיפ של " + (item.Client.email == "support@agalist.com" ? "Agalist" : item.Client.email.Split('@')[0]) + "<br> </div>" +
+                                "<div class=\" contentTip\">" + item.tip_content + "</div> <br><br>";
+            }
+
             return returnValue;
         }
 

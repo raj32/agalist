@@ -64,19 +64,12 @@
         <asp:Button ID="btnSendReminder" runat="server" Text="שלח" CssClass="BtnClass" Visible="false"
             CausesValidation="false" Font-Size="Small" Height="24px" OnClick="btnSendReminder_Click" />
     </div>
+    
     <div class="CentralPanelDiv">
         <div class="InsideCenterDiv">
             <div class="CenterOfCenterPageDiv">
-                 <div style="background:white;">
-                    <%=ProductListDBModel.DBUtils.getAllTips%>  
-                 </div>
+                
             </div>
-
-             <div  class="RightOfCenterPageDiv" dir="rtl">
-                  <div style="background:white;">
-                    hru hru
-                 </div>
-             </div>
         </div>
     </div>
 </asp:Content>
