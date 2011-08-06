@@ -18,6 +18,9 @@ public partial class TipsPage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+            tbxNewTip.Text = "";
+        
 
     }
     
@@ -101,4 +104,31 @@ public partial class TipsPage : System.Web.UI.Page
     }
 
 
+    protected void btnAddNewTip_Click(object sender, EventArgs e)
+    {
+        int lclUserId;
+        if (Request.Cookies["UserIdNew"] != null)
+            lclUserId = Convert.ToInt16((Request.Cookies["UserIdNew"].Value));
+        else
+            lclUserId = 118;
+        if (tbxNewTip.Text != "")
+        {
+            Tip lclNewTip = new Tip()
+            {
+                is_active = 0,
+                tip_content = tbxNewTip.Text,
+                tip_enter_date = DateTime.Now,
+                user_id = lclUserId
+
+            };
+            AgaMail tipMail = new AgaMail("support@agalist.com", MailKind.Tip);
+            tipMail.setMailContent(tbxNewTip.Text);
+            tipMail.ExecuteSending();
+            DBHandler.GetInstanceProp.Tips.AddObject(lclNewTip);
+            DBHandler.GetInstanceProp.SaveChanges();
+
+        }
+
+        tbxNewTip.Text = "";
+    }
 }

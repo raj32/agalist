@@ -35,7 +35,7 @@ public class AgaMail
         switch (_mailKind)
         {
             case MailKind.Tip:
-                _mailContent = "Hello! \nNew tip has been received:" + _mailContent + ". \n To edit the tip, press http://marketd.no-ip.org/newtip.aspx . \nTo allow the tip press  http://marketd.no-ip.org/yestip.aspx . \nTo deny the tip press  http://marketd.no-ip.org/notip.aspx ";
+                _mailContent = "Hello! \n\nNew tip has been received: \n\n" + _mailContent + ". \n\n To edit the tip, press http://www.agalist.com/newTip.aspx . \n\n";
                 return _mailContent;
                
             case MailKind.PasswordReminder:
@@ -58,18 +58,14 @@ public class AgaMail
 
     public void ExecuteSending()
     {
-        MailMessage mailMsg = new MailMessage();
-        //Set the require property               
-        //mailMsg.IsBodyHtml = false;
-        //Create the new SmtpClient instance
+        MailMessage mailMsg = new MailMessage();   
         SmtpClient smtp = new SmtpClient();
         smtp.TargetName = "mail.agalist.com";
         smtp.Host = "mail.agalist.com";
         smtp.EnableSsl = false;
         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
         smtp.UseDefaultCredentials = false;
-        smtp.Credentials = new NetworkCredential("support@agalist.com", "donald");
-        //smtp.Send(mailMsg);
+        smtp.Credentials = new NetworkCredential("support@agalist.com", "donald");      
         smtp.Send("support@agalist.com", _sendTo, "Mail from AgaList", prepareMail());
     }    
 }

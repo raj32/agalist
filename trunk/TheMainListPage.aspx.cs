@@ -317,8 +317,7 @@ public partial class TheMainListPage : System.Web.UI.Page
         {
             DBHandler.GetInstance().Shopping_List_Hist.DeleteObject(arrShoppingListHist[i]);
         }        
-        DBHandler.GetInstance().SaveChanges();
-
+        DBHandler.GetInstance().SaveChanges();        
         lstSavedBaskets.Items.Clear();
         lstSavedBaskets.Items.AddRange(getList(userID));
     }

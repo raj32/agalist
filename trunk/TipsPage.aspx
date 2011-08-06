@@ -64,12 +64,42 @@
         <asp:Button ID="btnSendReminder" runat="server" Text="שלח" CssClass="BtnClass" Visible="false"
             CausesValidation="false" Font-Size="Small" Height="24px" OnClick="btnSendReminder_Click" />
     </div>
-    
+
+<div  style ="background:white; direction:rtl; float:left;width:800px; margin-bottom:20px;">
     <div class="CentralPanelDiv">
-        <div class="InsideCenterDiv">
-            <div class="CenterOfCenterPageDiv">
-                
+        <div class="CenterOfCenterPageDiv">
+                <div style="background:white; float:left; margin-top:30px;">
+                <%=ProductListDBModel.DBUtils.getAllTipsForScr%>  
+                <div class="nameTip"> הוספת טיפ חדש  </div>
+                    <div class="contentTip">  
+                        <asp:TextBox ID="tbxNewTip" runat="server" Width="400px" Height="50px" CausesValidation="false" AutoComplete="off" TextMode="MultiLine"  ForeColor="#F96C05"> </asp:TextBox> 
+                        <div style = " direction:ltr;  text-align:left; margin-left:5px;">
+                            <asp:Button ID="btnAddNewTip" runat="server" Text="הוסף" class="BtnClass"  CausesValidation="false"
+                                onclick="btnAddNewTip_Click" />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+        </div>
+        <div  class="RightOfCenterPageDiv" style=" background:white;" dir="rtl">
+            <div style="background:white;">
+                <div id="AdInList" style= " width:180px; margin-left:40px; margin-top:35px; " >
+                                            <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-9177698621225528";
+                /* inTipsPageAd */
+                google_ad_slot = "3700196406";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                //-->
+                </script>
+                    <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
             </div>
         </div>
+</div>             
+
     </div>
 </asp:Content>

@@ -15,7 +15,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Application["Version"] = "V1.56b";
+        Application["Version"] = "V1.56";
         lblVersion.Text = (string)Application["Version"];
     }
 

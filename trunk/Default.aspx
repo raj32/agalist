@@ -342,18 +342,23 @@
                                 </div>
 
                                    <!-------TipsDiv------->
+                                    
                                     <div class="TipsDiv"> 
-                                         <h5 style="margin-bottom:0px; margin-top:0px; margin-right:20px;">
+                                        <h5 style="margin-bottom:0px; margin-top:0px; margin-right:20px;">
                                             10 טיפים לחיסכון בסופר
                                         </h5>
                                         <img src="Images/UnderTipsLine.jpg"/>
                                         <div style="clear: both;">&nbsp</div>
                                         <marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="1" onmouseover="stop()" onmouseout="start()"> 
                                             <div class = "ParTips">
-                                                <%=ProductListDBModel.DBUtils.getAllTips%> 
+                                                  <a href="TipsPage.aspx" class = "ParTips"> <%=ProductListDBModel.DBUtils.getAllTips%>  </a>
                                             </div>
                                         </marquee>
+                                        <div class = "ParTips" style="padding-top:15px;">
+                                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/TipsPage.aspx" class = "AddTipLink"> להוספת טיפ לחץ כאן</asp:HyperLink> 
+                                        </div>
                                     </div> 
+                                   
                                     <!-------TipsDiv------->
 
                                     <div class="TipsDiv" style=" margin-right:20px; text-align:center;" >
