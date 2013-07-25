@@ -1,0 +1,752 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProductListDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ProductListDBModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="ProductListDBModel.Store.Cities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clients" EntityType="ProductListDBModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Measures" EntityType="ProductListDBModel.Store.Measures" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Product_in_store" EntityType="ProductListDBModel.Store.Product_in_store" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="ProductListDBModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sectors" EntityType="ProductListDBModel.Store.Sectors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shopping_List" EntityType="ProductListDBModel.Store.Shopping_List" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shopping_List_Hist" EntityType="ProductListDBModel.Store.Shopping_List_Hist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Stores" EntityType="ProductListDBModel.Store.Stores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="ProductListDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tips" EntityType="ProductListDBModel.Store.Tips" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Products_Measures" Association="ProductListDBModel.Store.FK_Products_Measures">
+            <End Role="Measures" EntitySet="Measures" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Clients" Association="ProductListDBModel.Store.FK_Shopping_List_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Shopping_List" EntitySet="Shopping_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Hist_Clients" Association="ProductListDBModel.Store.FK_Shopping_List_Hist_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Shopping_List_Hist" EntitySet="Shopping_List_Hist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Hist_Products" Association="ProductListDBModel.Store.FK_Shopping_List_Hist_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Shopping_List_Hist" EntitySet="Shopping_List_Hist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Products" Association="ProductListDBModel.Store.FK_Shopping_List_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Shopping_List" EntitySet="Shopping_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tips_Clients" Association="ProductListDBModel.Store.FK_Tips_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Tips" EntitySet="Tips" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="join_date" Type="date" />
+          <Property Name="last_login_date" Type="date" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="update_date_shop_list" Type="date" />
+          <Property Name="comments" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Measures">
+          <Key>
+            <PropertyRef Name="measure_unit_id" />
+          </Key>
+          <Property Name="measure_unit_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="measure_unit_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="is_package" Type="int" />
+          <Property Name="is_measure" Type="int" />
+          <Property Name="add_num" Type="float" />
+        </EntityType>
+        <EntityType Name="Product_in_store">
+          <Key>
+            <PropertyRef Name="product_in_store_id" />
+          </Key>
+          <Property Name="product_in_store_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="store_id" Type="int" />
+          <Property Name="price" Type="numeric" Scale="2" />
+          <Property Name="price_date" Type="datetime" />
+          <Property Name="updated_by_user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="measure_unit_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Sectors">
+          <Key>
+            <PropertyRef Name="sector_id" />
+          </Key>
+          <Property Name="sector_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sector_name" Type="nchar" MaxLength="100" />
+          <Property Name="city_id" Type="int" Nullable="false" />
+          <Property Name="city_name" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Shopping_List">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="qtty" Type="float" />
+          <Property Name="order_no" Type="int" />
+          <Property Name="free_text" Type="nchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Shopping_List_Hist">
+          <Key>
+            <PropertyRef Name="shopping_list_hist_id" />
+          </Key>
+          <Property Name="shopping_list_hist_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="qtty" Type="float" />
+          <Property Name="stored_list_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="save_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="store_id" />
+          </Key>
+          <Property Name="store_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="store_name" Type="nchar" MaxLength="50" />
+          <Property Name="store_chain_id" Type="int" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="street" Type="nchar" MaxLength="100" />
+          <Property Name="number" Type="int" />
+          <Property Name="sector_id" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tips">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tip_content" Type="nvarchar" MaxLength="500" />
+          <Property Name="tip_enter_date" Type="date" />
+          <Property Name="is_active" Type="int" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Products_Measures">
+          <End Role="Measures" Type="ProductListDBModel.Store.Measures" Multiplicity="0..1" />
+          <End Role="Products" Type="ProductListDBModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measures">
+              <PropertyRef Name="measure_unit_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="measure_unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Clients">
+          <End Role="Clients" Type="ProductListDBModel.Store.Clients" Multiplicity="0..1" />
+          <End Role="Shopping_List" Type="ProductListDBModel.Store.Shopping_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Shopping_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Hist_Clients">
+          <End Role="Clients" Type="ProductListDBModel.Store.Clients" Multiplicity="1" />
+          <End Role="Shopping_List_Hist" Type="ProductListDBModel.Store.Shopping_List_Hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Shopping_List_Hist">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Hist_Products">
+          <End Role="Products" Type="ProductListDBModel.Store.Products" Multiplicity="1" />
+          <End Role="Shopping_List_Hist" Type="ProductListDBModel.Store.Shopping_List_Hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Shopping_List_Hist">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Products">
+          <End Role="Products" Type="ProductListDBModel.Store.Products" Multiplicity="0..1" />
+          <End Role="Shopping_List" Type="ProductListDBModel.Store.Shopping_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Shopping_List">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tips_Clients">
+          <End Role="Clients" Type="ProductListDBModel.Store.Clients" Multiplicity="0..1" />
+          <End Role="Tips" Type="ProductListDBModel.Store.Tips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Tips">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Shopping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="luser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Shopping_list_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="luser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StoredProcedure1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="luser" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateProductAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="product_id" Type="int" Mode="In" />
+          <Parameter Name="amount" Type="float" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProductListDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ProdListDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Cities" EntityType="ProductListDBModel.City" />
+          <EntitySet Name="Clients" EntityType="ProductListDBModel.Client" />
+          <EntitySet Name="Measures" EntityType="ProductListDBModel.Measure" />
+          <EntitySet Name="Products" EntityType="ProductListDBModel.Product" />
+          <AssociationSet Name="FK_Products_Measures" Association="ProductListDBModel.FK_Products_Measures">
+            <End Role="Measure" EntitySet="Measures" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Shopping_List" EntityType="ProductListDBModel.Shopping_List" />
+          <AssociationSet Name="FK_Shopping_List_Clients" Association="ProductListDBModel.FK_Shopping_List_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Shopping_List" EntitySet="Shopping_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Products" Association="ProductListDBModel.FK_Shopping_List_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Shopping_List" EntitySet="Shopping_List" />
+          </AssociationSet>
+          <EntitySet Name="Shopping_List_Hist" EntityType="ProductListDBModel.Shopping_List_Hist" />
+          <AssociationSet Name="FK_Shopping_List_Hist_Clients" Association="ProductListDBModel.FK_Shopping_List_Hist_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Shopping_List_Hist" EntitySet="Shopping_List_Hist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shopping_List_Hist_Products" Association="ProductListDBModel.FK_Shopping_List_Hist_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Shopping_List_Hist" EntitySet="Shopping_List_Hist" />
+          </AssociationSet>
+          <EntitySet Name="Tips" EntityType="ProductListDBModel.Tip" />
+          <AssociationSet Name="FK_Tips_Clients" Association="ProductListDBModel.FK_Tips_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Tip" EntitySet="Tips" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ProductListDBModel.sysdiagram" />
+          <EntitySet Name="Product_in_store" EntityType="ProductListDBModel.Product_in_store" />
+          <EntitySet Name="Sectors" EntityType="ProductListDBModel.Sector" />
+          <EntitySet Name="Stores" EntityType="ProductListDBModel.Store" />
+          <AssociationSet Name="Product_in_storeProduct" Association="ProductListDBModel.Product_in_storeProduct">
+            <End Role="Product_in_store" EntitySet="Product_in_store" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <FunctionImport Name="Shopping_list_proc" ReturnType="Collection(String)">
+          <Parameter Name="luser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProductAmount">
+            <Parameter Name="product_id" Mode="In" Type="Int32" />
+            <Parameter Name="amount" Mode="In" Type="Double" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Type="Int32" Name="city_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="city_name" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Type="Int32" Name="user_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="join_date" />
+          <Property Type="DateTime" Name="last_login_date" />
+          <Property Type="Int32" Name="city_id" />
+          <Property Type="String" Name="address" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="update_date_shop_list" />
+          <Property Type="String" Name="comments" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Shopping_List" Relationship="ProductListDBModel.FK_Shopping_List_Clients" FromRole="Client" ToRole="Shopping_List" />
+          <NavigationProperty Name="Shopping_List_Hist" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Clients" FromRole="Client" ToRole="Shopping_List_Hist" />
+          <NavigationProperty Name="Tips" Relationship="ProductListDBModel.FK_Tips_Clients" FromRole="Client" ToRole="Tip" />
+        </EntityType>
+        <EntityType Name="Measure">
+          <Key>
+            <PropertyRef Name="measure_unit_id" />
+          </Key>
+          <Property Type="Int32" Name="measure_unit_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="measure_unit_name" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="ProductListDBModel.FK_Products_Measures" FromRole="Measure" ToRole="Product" />
+          <Property Type="Int32" Name="is_package" />
+          <Property Type="Int32" Name="is_measure" />
+          <Property Type="Double" Name="add_num" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Type="Int32" Name="product_id" Nullable="false" />
+          <Property Type="String" Name="product_name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="measure_unit_id" />
+          <NavigationProperty Name="Measure" Relationship="ProductListDBModel.FK_Products_Measures" FromRole="Product" ToRole="Measure" />
+          <NavigationProperty Name="Shopping_List" Relationship="ProductListDBModel.FK_Shopping_List_Products" FromRole="Product" ToRole="Shopping_List" />
+          <NavigationProperty Name="Shopping_List_Hist" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Products" FromRole="Product" ToRole="Shopping_List_Hist" />
+          <NavigationProperty Name="Product_in_store" Relationship="ProductListDBModel.Product_in_storeProduct" FromRole="Product" ToRole="Product_in_store" />
+        </EntityType>
+        <Association Name="FK_Products_Measures">
+          <End Type="ProductListDBModel.Measure" Role="Measure" Multiplicity="0..1" />
+          <End Type="ProductListDBModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measure">
+              <PropertyRef Name="measure_unit_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="measure_unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Shopping_List">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="user_id" />
+          <Property Type="Int32" Name="product_id" />
+          <Property Type="Double" Name="qtty" />
+          <NavigationProperty Name="Client" Relationship="ProductListDBModel.FK_Shopping_List_Clients" FromRole="Shopping_List" ToRole="Client" />
+          <NavigationProperty Name="Product" Relationship="ProductListDBModel.FK_Shopping_List_Products" FromRole="Shopping_List" ToRole="Product" />
+          <Property Type="Int32" Name="order_no" />
+          <Property Type="String" Name="free_text" MaxLength="1000" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Shopping_List_Clients">
+          <End Type="ProductListDBModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="ProductListDBModel.Shopping_List" Role="Shopping_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Shopping_List">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Products">
+          <End Type="ProductListDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="ProductListDBModel.Shopping_List" Role="Shopping_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Shopping_List">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Shopping_List_Hist">
+          <Key>
+            <PropertyRef Name="shopping_list_hist_id" />
+          </Key>
+          <Property Type="Int32" Name="shopping_list_hist_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="Int32" Name="product_id" Nullable="false" />
+          <Property Type="Double" Name="qtty" />
+          <Property Type="String" Name="stored_list_name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="save_date" />
+          <NavigationProperty Name="Client" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Clients" FromRole="Shopping_List_Hist" ToRole="Client" />
+          <NavigationProperty Name="Product" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Products" FromRole="Shopping_List_Hist" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Shopping_List_Hist_Clients">
+          <End Type="ProductListDBModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ProductListDBModel.Shopping_List_Hist" Role="Shopping_List_Hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Shopping_List_Hist">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shopping_List_Hist_Products">
+          <End Type="ProductListDBModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ProductListDBModel.Shopping_List_Hist" Role="Shopping_List_Hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Shopping_List_Hist">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="tip_content" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="tip_enter_date" />
+          <Property Type="Int32" Name="is_active" />
+          <Property Type="Int32" Name="user_id" />
+          <NavigationProperty Name="Client" Relationship="ProductListDBModel.FK_Tips_Clients" FromRole="Tip" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Tips_Clients">
+          <End Type="ProductListDBModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="ProductListDBModel.Tip" Role="Tip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Tip">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Product_in_store">
+          <Key>
+            <PropertyRef Name="product_in_store_id" />
+          </Key>
+          <Property Type="Int32" Name="product_in_store_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="product_id" />
+          <Property Type="Int32" Name="store_id" />
+          <Property Type="Decimal" Name="price" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="price_date" />
+          <Property Type="Int32" Name="updated_by_user_id" />
+          <NavigationProperty Name="Product" Relationship="ProductListDBModel.Product_in_storeProduct" FromRole="Product_in_store" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="sector_id" />
+          </Key>
+          <Property Type="Int32" Name="sector_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="sector_name" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="city_id" Nullable="false" />
+          <Property Type="String" Name="city_name" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="store_id" />
+          </Key>
+          <Property Type="Int32" Name="store_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="store_name" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="store_chain_id" />
+          <Property Type="Int32" Name="city_id" />
+          <Property Type="String" Name="street" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="number" />
+          <Property Type="Int32" Name="sector_id" />
+        </EntityType>
+        <Association Name="Product_in_storeProduct">
+          <End Type="ProductListDBModel.Product_in_store" Role="Product_in_store" Multiplicity="*" />
+          <End Type="ProductListDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Product_in_store">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Shopping_list_proc_Result">
+          <Property Type="Double" Name="product_list_line" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProductListDBModelStoreContainer" CdmEntityContainer="ProdListDBEntities" >
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="ProductListDBModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ProductListDBModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="update_date_shop_list" ColumnName="update_date_shop_list" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="last_login_date" ColumnName="last_login_date" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measures">
+            <EntityTypeMapping TypeName="ProductListDBModel.Measure">
+              <MappingFragment StoreEntitySet="Measures">
+                <ScalarProperty Name="add_num" ColumnName="add_num" />
+                <ScalarProperty Name="is_measure" ColumnName="is_measure" />
+                <ScalarProperty Name="is_package" ColumnName="is_package" />
+                <ScalarProperty Name="measure_unit_name" ColumnName="measure_unit_name" />
+                <ScalarProperty Name="measure_unit_id" ColumnName="measure_unit_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ProductListDBModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="measure_unit_id" ColumnName="measure_unit_id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shopping_List">
+            <EntityTypeMapping TypeName="ProductListDBModel.Shopping_List">
+              <MappingFragment StoreEntitySet="Shopping_List">
+                <ScalarProperty Name="free_text" ColumnName="free_text" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="qtty" ColumnName="qtty" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shopping_List_Hist">
+            <EntityTypeMapping TypeName="ProductListDBModel.Shopping_List_Hist">
+              <MappingFragment StoreEntitySet="Shopping_List_Hist">
+                <ScalarProperty Name="save_date" ColumnName="save_date" />
+                <ScalarProperty Name="stored_list_name" ColumnName="stored_list_name" />
+                <ScalarProperty Name="qtty" ColumnName="qtty" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="shopping_list_hist_id" ColumnName="shopping_list_hist_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tips">
+            <EntityTypeMapping TypeName="ProductListDBModel.Tip">
+              <MappingFragment StoreEntitySet="Tips">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="tip_enter_date" ColumnName="tip_enter_date" />
+                <ScalarProperty Name="tip_content" ColumnName="tip_content" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProductListDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_in_store">
+            <EntityTypeMapping TypeName="ProductListDBModel.Product_in_store">
+              <MappingFragment StoreEntitySet="Product_in_store">
+                <ScalarProperty Name="updated_by_user_id" ColumnName="updated_by_user_id" />
+                <ScalarProperty Name="price_date" ColumnName="price_date" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_in_store_id" ColumnName="product_in_store_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="ProductListDBModel.Sector">
+              <MappingFragment StoreEntitySet="Sectors">
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="sector_name" ColumnName="sector_name" />
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="ProductListDBModel.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="store_chain_id" ColumnName="store_chain_id" />
+                <ScalarProperty Name="store_name" ColumnName="store_name" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Shopping_list_proc" FunctionName="ProductListDBModel.Store.Shopping_list_proc" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateProductAmount" FunctionName="ProductListDBModel.Store.UpdateProductAmount" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ProdListEnt" >
+        <EntityTypeShape EntityType="ProductListDBModel.City" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583326" />
+        <EntityTypeShape EntityType="ProductListDBModel.Client" Width="1.5" PointX="1.75" PointY="2.5" Height="3.3263964843749996" />
+        <EntityTypeShape EntityType="ProductListDBModel.Measure" Width="1.5" PointX="7.75" PointY="0.625" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="ProductListDBModel.Product" Width="1.5" PointX="3.625" PointY="0.5" Height="2.172587890625" />
+        <AssociationConnector Association="ProductListDBModel.FK_Products_Measures" >
+          <ConnectorPoint PointX="7.75" PointY="1.03125" />
+          <ConnectorPoint PointX="5.125" PointY="1.03125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="ProductListDBModel.Shopping_List" Width="1.5" PointX="5.75" PointY="1.5" Height="2.3648893229166661" />
+        <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Clients" >
+          <ConnectorPoint PointX="3.25" PointY="3.3961393229166661" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="3.3961393229166656" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="3.3961393229166661" />
+          <ConnectorPoint PointX="5.75" PointY="3.3961393229166661" />
+        </AssociationConnector>
+        <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Products" >
+          <ConnectorPoint PointX="5.125" PointY="2.1824446614583333" />
+          <ConnectorPoint PointX="5.75" PointY="2.1824446614583333" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="ProductListDBModel.Shopping_List_Hist" Width="1.5" PointX="8" PointY="2.875" Height="2.5571907552083326" />
+        <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Hist_Clients" >
+          <ConnectorPoint PointX="3.25" PointY="4.259366803385416" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="4.2593668033854151" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="4.259366803385416" />
+          <ConnectorPoint PointX="8" PointY="4.259366803385416" />
+        </AssociationConnector>
+        <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Hist_Products" >
+          <ConnectorPoint PointX="5.125" PointY="0.53125" />
+          <ConnectorPoint PointX="9.40625" PointY="0.53125" />
+          <ConnectorPoint PointX="9.40625" PointY="2.875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="ProductListDBModel.Tip" Width="1.5" PointX="10.625" PointY="0.5" Height="2.1725878906249996" />
+        <AssociationConnector Association="ProductListDBModel.FK_Tips_Clients" >
+          <ConnectorPoint PointX="3.25" PointY="4.0621255631510405" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="4.06212556315104" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="4.0621255631510405" />
+          <ConnectorPoint PointX="7.75" PointY="4.0621255631510405" />
+          <ConnectorPoint PointX="7.75" PointY="2.8552864583333339" />
+          <ConnectorPoint PointX="9.5" PointY="2.8552864583333339" />
+          <ConnectorPoint PointX="9.5" PointY="2.625" />
+          <ConnectorPoint PointX="10.375" PointY="2.625" />
+          <ConnectorPoint PointX="10.375" PointY="2.9225878906249996" />
+          <ConnectorPoint PointX="11.375" PointY="2.9225878906249996" />
+          <ConnectorPoint PointX="11.375" PointY="2.6725878906249996" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="ProductListDBModel.sysdiagram" Width="1.5" PointX="2.875" PointY="8.25" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="ProductListDBModel.Product_in_store" Width="1.5" PointX="4.375" PointY="4.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="ProductListDBModel.Sector" Width="1.5" PointX="6.375" PointY="6.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ProductListDBModel.Store" Width="1.5" PointX="8.375" PointY="6.75" Height="2.3648893229166674" />
+        <AssociationConnector Association="ProductListDBModel.Product_in_storeProduct">
+          <ConnectorPoint PointX="4.75" PointY="4.75" />
+          <ConnectorPoint PointX="4.75" PointY="2.864889322916667" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
