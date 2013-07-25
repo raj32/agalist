@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+  <head>
+    <title>Welcome To Mobile Agalist</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js">
+  </script>
+  </head>
+  <body>
+	<section id="page1" data-role="page">
+		<header data-role="header"><h1>Mobile Agalist</h1></header>
+		<div class="content">
+			<p align="center">Welcome to mobile AgaList</p>
+            <img src="agalistMobile.jpg" width="320px"/>
+			<p><a href="#page2">Go to the second page!</a></p>
+		</div>
+		<footer data-role="footer" data-position="fixed"><h1>GM</h1></footer>
+	</section>
+	<section id="page2" data-role="page">
+		<header data-role="header"><h1>jQuery Mobile</h1></header>
+		<div class="content">
+			<p>Second page!</p>
+			<p><a href="#page3" data-rel="dialog" data-transition="slidedown">Go to third page as dialog</a></p>
+		</div>
+		<footer data-role="footer" data-position="fixed"><h1>O'Reilly</h1></footer>
+	</section>
+	<!-- begin third page -->
+	<section id="page3" data-role="page">
+	  <header data-role="header"><h1>jQuery Mobile</h1></header>
+      <h3>Unordered List</h3>
+         <ul data-role="listview">
+          <li><a href="#">Item</a></li>
+          <li><a href="#">Item</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+        <h3>Ordered List</h3>
+        <ol data-role="listview">
+          <li><a href="#">Item</a></li>
+          <li><a href="#">Item</a></li>
+          <li><a href="#">Item</a></li>
+        </ol>
+	  <div data-role="content" class="content">
+		<p>Third page!</p>
+		<p><a href="external.html">Go to external page</a></p>
+	  </div>
+	  <footer data-role="footer" data-position="bottom"><h1>GM</h1></footer>
+	</section>
+<!-- end third page -->
+  </body>
+</html>

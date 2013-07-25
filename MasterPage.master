@@ -1,0 +1,136 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage"  %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head id="Head1" runat="server">
+    <title> ניהול רשימת קניות מוכנה </title>
+    <meta name="description" content="להחליף את הפתק עם רשימת הקניות לסופר לכלי חדשני יותר
+לנהל רשימת קניות פשוטה ואינטואיטיבית
+לגשת לרשימת קניות אישית מכל מקום בו תימצאו
+למנוע שיחות טלפון מיותרות בזמן הקניות
+לנהל רשימת קניות שבועית, לחג, לפיקניק או לכל ארוע אחר " />
+    <meta name="keywords" content= "טיפים לקניה חכמה, רשימת קניות מוכנה, רשימות לסופר, רשימות קניה לסופר , ניהול רשימת קניות, רשימה לטלפון, מוצרי צכירה, מוצרי מזון, מוצרי מכולת, הנחות בסופר, רשימת קניות לבעל , עגלת קניות אונליין, סל קניות, סל מוצרים, קניות לחג, קניות לשבת, קניות ליומולדת, קניות לעל האש" />
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="jquery-1.6.2.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'UA-41057118-1', 'agalist.com');
+                ga('send', 'pageview');
+
+        </script>
+    <style type="text/css">
+        #form1
+        {
+            
+        }
+
+    </style>
+</head>    
+
+<body> 
+
+   
+    <div style="position:relative; top:130px; height:31px; background: url(Images/UpperRuller.bmp) repeat-x; ">
+      
+    </div>
+    <form id="Form1" runat="server" >
+
+
+        <div class="MainPageDiv">
+        
+            <div class="HeaderDiv">
+                <div class="HeaderLeftDiv"> 
+
+                    <asp:ContentPlaceHolder id="UsernamePassHolder" runat="server">
+                 
+                    </asp:ContentPlaceHolder>
+                    
+                    <div class="MasterPageLoginViewDiv">
+                    <asp:LoginView ID="MasterPageLoginView" runat="server">
+                        <LoggedInTemplate>
+                            שלום <asp:LoginName ID="MasterPageLoginView" runat="server" />
+                        </LoggedInTemplate>
+
+                        <AnonymousTemplate>
+                           <a> </a>
+                        </AnonymousTemplate>
+                    </asp:LoginView>
+                    
+                   &nbsp;<asp:LoginStatus Font-Size= "X-Large" ID="DefPageLoginStatus" runat="server"
+                        LogoutAction="Redirect" LogoutPageUrl="~/LogoutPage.aspx" LoginText="" ForeColor="White"
+                        LogoutText="יציאה" />
+                    </div>
+                </div>
+                <div class="HeaderCenterDiv">
+                    <br />
+                    <div style="clear:both;"></div>
+                    <h1 style="font-size:25px; margin-top:0px;  margin-right:45px;"> רשימת קניות  </h1>
+
+
+                </div>
+                <div class="HeaderRightDiv">
+                </div>
+                
+            </div >
+            
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <script type="text/javascript" language="javascript">
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+                prm.add_initializeRequest(InitializeRequest);
+                prm.add_endRequest(EndRequest);
+
+                function InitializeRequest(sender, args) {
+                    $get('forScriptDiv').style.cursor = 'wait';
+
+                    // Get a reference to the element that raised the postback,
+                    //   and disables it.
+                   $get(args._postBackElement.id).disabled = true;
+                }
+
+                function EndRequest(sender, args) {
+                    $get('forScriptDiv').style.cursor = 'auto';
+
+                    // Get a reference to the element that raised the postback
+                    //   which is completing, and enable it.
+                  $get(sender._postBackSettings.sourceElement.id).disabled = false;
+                }
+            </script>
+            <div id="forScriptDiv">
+                     <asp:ContentPlaceHolder id="CentralPlaceHolder" runat="server">
+
+                     </asp:ContentPlaceHolder>
+                </div>
+                <div style="clear:both;"> </div>
+            <div class="FooterDiv">
+                <div id="VersionDiv" style= "font-size:12px; direction:rtl; margin-right:40px;">
+                    לתמיכה,הצעות לשיפור,רעיונות חדשים ובכל נושא אחר אנא פנו למייל  <a  style=" color:Yellow;" href="mailto:support@agalist.tk">support@agalist.tk</a>
+                </div>
+                <div style=" text-align:left;">
+                    <asp:Label ID="lblVersion" runat="server"  Text="Label" Font-Size="XX-Small"></asp:Label>
+                <div />
+
+            </div> 
+
+        </div>    <!--  FooterDiv  -->
+        
+    </div>  <!--  MainPageDiv  -->
+
+    </form>
+
+</body>
+       
+</html>
+
+   
+

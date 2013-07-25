@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  
+  <system.web>
+    <sessionState timeout="500" />
+    <pages enableViewStateMac="true" viewStateEncryptionMode="Auto" />
+    <machineKey validationKey="BCCBAF3657FAA5AC8DDA7A6D5C8AB910FC06BB9C7A22DBE9CFE6FA04B518D28E2A126AA2F565C2799FFE2BBC63C0D67A6FB94FEE6EC76ACE3BA53AF5172A3BE7" decryptionKey="EA179215478D3B365A7677A28FE0B2EB06E63F579DAFEE2B" validation="SHA1" />    
+    <authentication mode="Forms">
+      <forms timeout="500000" slidingExpiration="true" />
+    </authentication>
+    <compilation debug="true" targetFramework="4.0">
+      <assemblies>
+        <add assembly="System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+        <add assembly="System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+        <add assembly="System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+        <add assembly="System.Web.Extensions.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+        <add assembly="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+        <add assembly="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+      </assemblies>
+      <buildProviders>
+        <add extension=".edmx" type="System.Data.Entity.Design.AspNet.EntityDesignerBuildProvider" />
+      </buildProviders>
+    </compilation>
+        <authorization>
+            <allow users="*" />
+        </authorization>
+  </system.web>
+  <connectionStrings>
+    <add name="ProdListDBEntities" connectionString="metadata=res://*/App_Code.ProdListEnt.csdl|res://*/App_Code.ProdListEnt.ssdl|res://*/App_Code.ProdListEnt.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\ProductListDB.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" />                                                     
+  </connectionStrings>
+    <system.webServer>
+        <directoryBrowse enabled="false" />     
+    </system.webServer>
+</configuration>

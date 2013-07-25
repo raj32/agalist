@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 25
+/svn/!svn/ver/2/trunk/Bin
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/Bin/LICENSE.txt
+END
+ReadMe.html
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/Bin/ReadMe.html
+END
+AjaxControlToolkitSampleSite.zip
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/Bin/AjaxControlToolkitSampleSite.zip
+END
+AjaxControlToolkit.dll
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/Bin/AjaxControlToolkit.dll
+END
+AjaxControlToolkit.pdb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/Bin/AjaxControlToolkit.pdb
+END

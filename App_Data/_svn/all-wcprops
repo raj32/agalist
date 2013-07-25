@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/4/trunk/App_Data
+END
+ASPNETDB.MDF
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/7/trunk/App_Data/ASPNETDB.MDF
+END
+aspnetdb_log.ldf
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/7/trunk/App_Data/aspnetdb_log.ldf
+END
+ProductListDB.mdf
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/4/trunk/App_Data/ProductListDB.mdf
+END
+ProductListDB_log.ldf
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4/trunk/App_Data/ProductListDB_log.ldf
+END
+ProductListDB01062011.bak
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/App_Data/ProductListDB01062011.bak
+END
+ProductListDB.bak
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/App_Data/ProductListDB.bak
+END
