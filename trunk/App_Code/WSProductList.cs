@@ -61,7 +61,12 @@ public class WSProductList : System.Web.Services.WebService {
     public List<String> ExportProductList(int userId)
     {
         List<String> result = new List<string>();
-        result = DBHandler.GetInstance().Shopping_list_proc(userId).ToList<String>();
+        try
+        {
+            result = DBHandler.GetInstance().Shopping_list_proc(userId).ToList<String>();
+        }
+        catch(Exception a) { }
+
         if (result.Count == 0) 
             result.Add("Empty");
         return result;
@@ -76,10 +81,6 @@ public class WSProductList : System.Web.Services.WebService {
         return success;
     }
 
-    [WebMethod]
-    public string lifewatch(){
-        return "oink";
-    }
 
     [WebMethod]
     public void UpdateAmount(int product_id, float amount,int userId)

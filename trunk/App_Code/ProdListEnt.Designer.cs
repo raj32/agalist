@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -254,7 +253,6 @@ namespace ProductListDBModel
         private ObjectSet<Store> _Stores;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -346,7 +344,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Function Imports
     
         /// <summary>
@@ -410,11 +407,11 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -439,7 +436,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -494,7 +490,6 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
-
     
     }
     
@@ -520,7 +515,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -743,7 +737,6 @@ namespace ProductListDBModel
         partial void OncommentsChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -814,7 +807,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -839,7 +831,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -966,7 +957,6 @@ namespace ProductListDBModel
         partial void Onadd_numChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -993,7 +983,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1018,7 +1007,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1097,7 +1085,6 @@ namespace ProductListDBModel
         partial void Onmeasure_unit_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1206,7 +1193,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1231,7 +1217,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1382,7 +1367,6 @@ namespace ProductListDBModel
         partial void Onupdated_by_user_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1425,7 +1409,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1452,7 +1435,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1555,7 +1537,6 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
-
     
     }
     
@@ -1581,7 +1562,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1732,7 +1712,6 @@ namespace ProductListDBModel
         partial void Onfree_textChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1813,7 +1792,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1842,7 +1820,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1993,7 +1970,6 @@ namespace ProductListDBModel
         partial void Onsave_dateChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2074,7 +2050,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2099,7 +2074,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2274,7 +2248,6 @@ namespace ProductListDBModel
         partial void Onsector_idChanged();
 
         #endregion
-
     
     }
     
@@ -2304,7 +2277,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2431,7 +2403,6 @@ namespace ProductListDBModel
         partial void OndefinitionChanged();
 
         #endregion
-
     
     }
     
@@ -2457,7 +2428,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2584,7 +2554,6 @@ namespace ProductListDBModel
         partial void Onuser_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2627,11 +2596,9 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
 
     #endregion
-
     #region ComplexTypes
     
     /// <summary>
@@ -2669,10 +2636,8 @@ namespace ProductListDBModel
         partial void Onproduct_list_lineChanged();
 
         #endregion
-
     }
 
     #endregion
-
     
 }
