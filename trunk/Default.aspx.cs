@@ -168,9 +168,13 @@ public partial class _Default : System.Web.UI.Page
       lblmailReminder.Visible = false;
       tbxmailReminder.Visible = false;
       btnSendReminder.Visible = false;
-      AgaMail myMail = new AgaMail(tbxmailReminder.Text, MailKind.PasswordReminder);
-      myMail.ExecuteSending();
-      tbxEmail.Text = tbxmailReminder.Text;
+       
+      if (tbxmailReminder.Text != "")
+      {
+          AgaMail myMail = new AgaMail(tbxmailReminder.Text, MailKind.PasswordReminder);
+          myMail.ExecuteSending();
+          tbxEmail.Text = tbxmailReminder.Text;
+      }
       
   }
 }
