@@ -40,8 +40,15 @@ public class AgaMail
                
             case MailKind.PasswordReminder:
                 String myPassword;
-                myPassword = (from b in myDBhandler.Clients where b.email == _sendTo select b.password).First<String>();
-                _mailContent = "Hello! \nYour password is: " + myPassword;                
+                try
+                {
+                    myPassword = (from b in myDBhandler.Clients where b.email == _sendTo select b.password).First<String>();
+
+                    _mailContent = "Hello! \nYour password is: " + myPassword;
+                }
+                catch(Exception e)
+                {
+                }
                 return _mailContent;
              
             case MailKind.Plain:
@@ -65,8 +72,10 @@ public class AgaMail
         smtp.EnableSsl = false;
         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
         smtp.UseDefaultCredentials = false;
-        smtp.Credentials = new NetworkCredential("support@agalist.tk", "donald");      
-        smtp.Send("support@agalist.tk", _sendTo, "Mail from AgaList (tk)", prepareMail());
+        smtp.Credentials = new NetworkCredential("support@agalist.tk", "donald");
+        String mailText = prepareMail();
+        if (mailText != "" && mailText != null)
+            smtp.Send("support@agalist.tk", _sendTo, "Mail from AgaList (tk)", mailText);
     }
     public void ExecuteSendingAdv()
     {
@@ -78,7 +87,10 @@ public class AgaMail
         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
         smtp.UseDefaultCredentials = false;
         smtp.Credentials = new NetworkCredential("support@agalist.tk", "donald");
-        smtp.Send("support@agalist.tk", _sendTo, "Mail from AgaList", prepareMail());
+        String mailText = prepareMail();
+        if (mailText != " ")
+            smtp.Send("support@agalist.tk", _sendTo, "Mail from AgaList", mailText);
+
     } 
 }
 
