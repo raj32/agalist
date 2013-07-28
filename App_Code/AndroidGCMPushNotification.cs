@@ -26,7 +26,7 @@ public class AndroidGCMPushNotification
 	}
     public string SendNotification(string deviceId, string message)
     {
-        string GoogleAppID = "agalistapp";
+        string GoogleAppID = "AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ";
         var SENDER_ID = "799634076916";// My Google ApI 12 digits on URL
         var value = message;
         WebRequest tRequest;

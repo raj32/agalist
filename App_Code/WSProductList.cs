@@ -12,6 +12,8 @@ using System.Net;
 using System.Net.Security;
 using System.Text;
 using System.IO;
+using PushSharp;
+using PushSharp.Android;
 
 /// <summary>
 /// Summary description for WSProductList
@@ -29,34 +31,8 @@ public class WSProductList : System.Web.Services.WebService {
 
     public WSProductList () {
 
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
     }
 
-   /* private void getCurrentUser() {
-        if (userID !=0)
-        {
-           // System.Web.HttpContext.Current.Request.Cookies["HRU"].Value = "Oinki Oinki";
-            userID = 78;
-        }
-        else
-        {
-           // System.Web.HttpContext.Current.Request.Cookies["HRU"].Value = "Oink";
-            if (System.Web.HttpContext.Current.Request.Cookies["UserIdNew"] != null)
-            {
-             
-                userID = Convert.ToInt16(System.Web.HttpContext.Current.Request.Cookies["UserIdNew"].Value);
-                userID = 117;
-            }
-            else
-            {
-                userID = 117;
-                //System.Web.HttpContext.Current.Request.Cookies["UserIdNew"].Value = "117";
-            }
-        }
-        
-    }
-    */
     [WebMethod]
     public List<String> ExportProductList(int userId)
     {
@@ -65,10 +41,10 @@ public class WSProductList : System.Web.Services.WebService {
         {
             result = DBHandler.GetInstance().Shopping_list_proc(userId).ToList<String>();
         }
-        catch(Exception a) { }
+        catch(Exception) { }
 
-        if (result.Count == 0) 
-            result.Add("Empty");
+        if (result.Count == 0)
+            result.Add("14~p~Error Executing Query~p~7~p~במשקל~p~0~p~0.5~p~0~n~");
         return result;
     }
 
@@ -85,9 +61,17 @@ public class WSProductList : System.Web.Services.WebService {
     [WebMethod]
     public void UpdateAmount(int product_id, float amount,int userId)
     {
-       DBHandler.GetInstance().UpdateProductAmount(product_id, amount, userId);
-       AndroidGCMPushNotification apnGCM = new AndroidGCMPushNotification();
-       string strResponse = apnGCM.SendNotification("AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ", "Testtt Push Notification message ");
+        DBHandler.GetInstance().UpdateProductAmount(product_id, amount, userId);
+        string andregid = DBUtils.getUserRegId(userId);
+        if (andregid!=null) 
+        {
+            var push = new PushBroker();
+            push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ"));
+            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId(andregid)
+                              .WithJson(@"{""alert"":""Hello World!"",""badge"":7,""sound"":""sound.caf""}"));
+            push.StopAllServices();
+        }
+        
     }
 
     [WebMethod]
@@ -97,58 +81,21 @@ public class WSProductList : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public void SetUser(int userId)
+    public void SetUserRegId(String userId, String androidRegId)
     {
-        userID = userId;
+        int intUserId = Convert.ToInt16(userId);
+        DBUtils.setUserRegId(intUserId, androidRegId);
     }
 
-
-
-    //GCM Push request Start
-    /*private void GcmPush()
+    [WebMethod]
+    public void gcmPush()
     {
-        ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateServerCertificate);
+        var push = new PushBroker();
 
-        HttpWebRequest Request = (HttpWebRequest)WebRequest.Create("https://android.googleapis.com/gcm/send");
-
-
-        Request.Method = "POST";
-        Request.KeepAlive = false;
-
-        string postData = "{ 'registration_ids': [ '" + registrationId + "' ], 'data': {'message': '" + message + "'}}";
-
-        byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-        Request.ContentType = "application/json";
-        //Request.ContentLength = byteArray.Length;
-
-
-        //Request.Headers.Add(HttpRequestHeader.Authorization, "GoogleLogin auth=" + AuthString);
-        Request.Headers.Add(HttpRequestHeader.Authorization, "Authorization: key=AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ");
-        //-- Delegate Modeling to Validate Server Certificate --//
-
-
-        //-- Create Stream to Write Byte Array --// 
-        Stream dataStream = Request.GetRequestStream();
-        dataStream.Write(byteArray, 0, byteArray.Length);
-        dataStream.Close();
-
-        //-- Post a Message --//
-        WebResponse Response = Request.GetResponse();
-        HttpStatusCode ResponseCode = ((HttpWebResponse)Response).StatusCode;
-        if (ResponseCode.Equals(HttpStatusCode.Unauthorized) || ResponseCode.Equals(HttpStatusCode.Forbidden))
-        {
-            var text = "Unauthorized - need new token";
-
-        }
-        else if (!ResponseCode.Equals(HttpStatusCode.OK))
-        {
-            var text = "Response from web service isn't OK";
-        }
-
-        StreamReader Reader = new StreamReader(Response.GetResponseStream());
-        string responseLine = Reader.ReadLine();
-        Reader.Close();
-    }*/
-    //GCM Push request End
+        push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ"));
+        push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("APA91bGVCd67wfTA6HdCwc64z3XuO3LpuWqD-tZGyHRtoWnihZOUwCIIKnlwyM3kh8Y7CMqh2k1RLFx2E0zjsGkg8MuAw90U5iizFmU6sPriqv7_w2w1XwtxtRlFkdCdb8t4UNxKFa18xYmtt6N_PsxRGeX4xvcEzQ")
+                              .WithJson(@"{""alert"":""Hello World!"",""badge"":7,""sound"":""sound.caf""}"));
+                                
+        push.StopAllServices();
+    }
 }

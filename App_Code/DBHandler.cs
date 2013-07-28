@@ -154,8 +154,6 @@ namespace ProductListDBModel
         {
 
             List<Tip> lclAllTips = (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b).ToList<Tip>();
-
-            //String[] lclAllTips =  (from b in DBHandler.GetInstanceProp.Tips where b.is_active == 1 select b.tip_content).ToArray<String>();
             String returnValue = "";
 
             int i = 0;
@@ -177,6 +175,42 @@ namespace ProductListDBModel
             return returnValue;
         }
 
+
+        internal static void setUserRegId(int userId, string androidRegId)
+        {
+            try
+            {
+                string currentRegId = (from b in DBHandler.GetInstanceProp.Clients where b.user_id == userId select b.comments).First<string>();
+
+                if (currentRegId != androidRegId)
+                {
+                    Client myObject = (from b in DBHandler.GetInstanceProp.Clients where b.user_id == userId select b).First<Client>();
+                    myObject.comments = androidRegId;
+                    DBHandler.GetInstanceProp.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        internal static string getUserRegId(int userId)
+        {
+            string currentRegId = null;
+            try
+            {
+                currentRegId = (from b in DBHandler.GetInstanceProp.Clients where b.user_id == userId select b.comments).First<string>();
+                if (currentRegId != null && currentRegId.Length>100)
+                {
+                    return currentRegId;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return currentRegId;
+        }
     }
 
 }
