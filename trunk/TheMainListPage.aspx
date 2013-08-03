@@ -36,6 +36,8 @@
 
     </script>
     <div style="background: white; direction: rtl; float: left; width: 760px;">
+        <asp:Button ID="AdminEnterButton" runat="server" Text="מנהל המערכת" CssClass="BtnClass"
+                                        Width="150px" OnClick="EnterAdminPage_Click" />
         <div class="CentralPanelDiv">
             <div class="InsideCenterDiv">
                 <div class="CenterOfCenterPageDiv">
@@ -236,8 +238,7 @@
                         <marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="1" onmouseover="stop()" onmouseout="start()"> 
                             <div class = "ParTips">
                                     <a href="TipsPage.aspx" class = "ParTips"> <%=ProductListDBModel.DBUtils.getAllTips%>  </a>
-                            </div>
-                        </marquee>
+                            </div></marquee>
                         <div class = "ParTips" style="padding-top:15px;">
                             <asp:HyperLink ID="lnkAddNewTips" runat="server" NavigateUrl="~/TipsPage.aspx" class = "AddTipLink"> להוספת טיפ לחץ כאן</asp:HyperLink> 
                         </div>

@@ -20,6 +20,7 @@ public partial class TheMainListPage : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {    
+        int lIsAdmin = 0;
         HttpContext.Current.Response.AddHeader("p3p", "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"");
         try
         {
@@ -47,6 +48,20 @@ public partial class TheMainListPage : System.Web.UI.Page
         NewProductDiv.Style.Add(HtmlTextWriterStyle.Top,"-100%");
         errorsdiv.Visible = false;
         lblSaveNewList.Text = "";
+        AdminEnterButton.Visible = false;
+
+        try
+        {
+            lIsAdmin =  (from b in myDBhandler.Clients where b.user_id == userID select b.is_admin).First<int>();
+        }
+        catch(Exception ex) {
+            lIsAdmin = 0;
+        };
+        if (lIsAdmin == 1) 
+        {
+            AdminEnterButton.Visible = true;
+        }
+
     }
 
     protected override void OnPreRender(EventArgs e)               //Return controls to starting condition.
@@ -347,5 +362,9 @@ public partial class TheMainListPage : System.Web.UI.Page
         }
         DBHandler.GetInstance().SaveChanges();
         
+    }
+    protected void EnterAdminPage_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/AdminPage.aspx");
     }
 }

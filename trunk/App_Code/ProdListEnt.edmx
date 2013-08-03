@@ -62,6 +62,7 @@
           <Property Name="address" Type="varchar" MaxLength="100" />
           <Property Name="update_date_shop_list" Type="date" />
           <Property Name="comments" Type="varchar" MaxLength="250" />
+          <Property Name="is_admin" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Measures">
           <Key>
@@ -134,6 +135,9 @@
           <Property Name="street" Type="nchar" MaxLength="100" />
           <Property Name="number" Type="int" />
           <Property Name="sector_id" Type="int" />
+          <Property Name="Address" Type="nchar" MaxLength="500" />
+          <Property Name="COORDINATE_X" Type="float" />
+          <Property Name="COORDINATE_Y" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -348,6 +352,7 @@
           <NavigationProperty Name="Shopping_List" Relationship="ProductListDBModel.FK_Shopping_List_Clients" FromRole="Client" ToRole="Shopping_List" />
           <NavigationProperty Name="Shopping_List_Hist" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Clients" FromRole="Client" ToRole="Shopping_List_Hist" />
           <NavigationProperty Name="Tips" Relationship="ProductListDBModel.FK_Tips_Clients" FromRole="Client" ToRole="Tip" />
+          <Property Type="Int32" Name="is_admin" Nullable="false" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -523,6 +528,9 @@
           <Property Type="String" Name="street" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="number" />
           <Property Type="Int32" Name="sector_id" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Type="Double" Name="COORDINATE_X" />
+          <Property Type="Double" Name="COORDINATE_Y" />
         </EntityType>
         <Association Name="Product_in_storeProduct">
           <End Type="ProductListDBModel.Product_in_store" Role="Product_in_store" Multiplicity="*" />
@@ -556,6 +564,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="ProductListDBModel.Client">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="update_date_shop_list" ColumnName="update_date_shop_list" />
                 <ScalarProperty Name="address" ColumnName="address" />
@@ -659,6 +668,9 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="ProductListDBModel.Store">
               <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="COORDINATE_Y" ColumnName="COORDINATE_Y" />
+                <ScalarProperty Name="COORDINATE_X" ColumnName="COORDINATE_X" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="sector_id" ColumnName="sector_id" />
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="street" ColumnName="street" />

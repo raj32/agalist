@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -254,7 +253,6 @@ namespace ProductListDBModel
         private ObjectSet<Store> _Stores;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -346,7 +344,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Function Imports
     
         /// <summary>
@@ -410,11 +407,11 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -439,7 +436,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -494,7 +490,6 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
-
     
     }
     
@@ -512,15 +507,16 @@ namespace ProductListDBModel
         /// Create a new Client object.
         /// </summary>
         /// <param name="user_id">Initial value of the user_id property.</param>
-        public static Client CreateClient(global::System.Int32 user_id)
+        /// <param name="is_admin">Initial value of the is_admin property.</param>
+        public static Client CreateClient(global::System.Int32 user_id, global::System.Int32 is_admin)
         {
             Client client = new Client();
             client.user_id = user_id;
+            client.is_admin = is_admin;
             return client;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -741,9 +737,32 @@ namespace ProductListDBModel
         private global::System.String _comments;
         partial void OncommentsChanging(global::System.String value);
         partial void OncommentsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 is_admin
+        {
+            get
+            {
+                return _is_admin;
+            }
+            set
+            {
+                Onis_adminChanging(value);
+                ReportPropertyChanging("is_admin");
+                _is_admin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("is_admin");
+                Onis_adminChanged();
+            }
+        }
+        private global::System.Int32 _is_admin;
+        partial void Onis_adminChanging(global::System.Int32 value);
+        partial void Onis_adminChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -814,7 +833,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -839,7 +857,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -966,7 +983,6 @@ namespace ProductListDBModel
         partial void Onadd_numChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -993,7 +1009,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1018,7 +1033,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1097,7 +1111,6 @@ namespace ProductListDBModel
         partial void Onmeasure_unit_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1206,7 +1219,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1231,7 +1243,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1382,7 +1393,6 @@ namespace ProductListDBModel
         partial void Onupdated_by_user_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1425,7 +1435,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1452,7 +1461,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1555,7 +1563,6 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
-
     
     }
     
@@ -1581,7 +1588,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1732,7 +1738,6 @@ namespace ProductListDBModel
         partial void Onfree_textChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1813,7 +1818,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1842,7 +1846,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1993,7 +1996,6 @@ namespace ProductListDBModel
         partial void Onsave_dateChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2074,7 +2076,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2099,7 +2100,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2272,9 +2272,80 @@ namespace ProductListDBModel
         private Nullable<global::System.Int32> _sector_id;
         partial void Onsector_idChanging(Nullable<global::System.Int32> value);
         partial void Onsector_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> COORDINATE_X
+        {
+            get
+            {
+                return _COORDINATE_X;
+            }
+            set
+            {
+                OnCOORDINATE_XChanging(value);
+                ReportPropertyChanging("COORDINATE_X");
+                _COORDINATE_X = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("COORDINATE_X");
+                OnCOORDINATE_XChanged();
+            }
+        }
+        private Nullable<global::System.Double> _COORDINATE_X;
+        partial void OnCOORDINATE_XChanging(Nullable<global::System.Double> value);
+        partial void OnCOORDINATE_XChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> COORDINATE_Y
+        {
+            get
+            {
+                return _COORDINATE_Y;
+            }
+            set
+            {
+                OnCOORDINATE_YChanging(value);
+                ReportPropertyChanging("COORDINATE_Y");
+                _COORDINATE_Y = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("COORDINATE_Y");
+                OnCOORDINATE_YChanged();
+            }
+        }
+        private Nullable<global::System.Double> _COORDINATE_Y;
+        partial void OnCOORDINATE_YChanging(Nullable<global::System.Double> value);
+        partial void OnCOORDINATE_YChanged();
 
         #endregion
-
     
     }
     
@@ -2304,7 +2375,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2431,7 +2501,6 @@ namespace ProductListDBModel
         partial void OndefinitionChanged();
 
         #endregion
-
     
     }
     
@@ -2457,7 +2526,6 @@ namespace ProductListDBModel
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2584,7 +2652,6 @@ namespace ProductListDBModel
         partial void Onuser_idChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2627,11 +2694,9 @@ namespace ProductListDBModel
         }
 
         #endregion
-
     }
 
     #endregion
-
     #region ComplexTypes
     
     /// <summary>
@@ -2669,10 +2734,8 @@ namespace ProductListDBModel
         partial void Onproduct_list_lineChanged();
 
         #endregion
-
     }
 
     #endregion
-
     
 }
