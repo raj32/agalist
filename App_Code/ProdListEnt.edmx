@@ -232,6 +232,10 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Shopping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="luser" Type="int" Mode="In" />
         </Function>
@@ -327,6 +331,10 @@
             <Parameter Name="product_id" Mode="In" Type="Int32" />
             <Parameter Name="amount" Mode="In" Type="Double" />
             <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RegisterUser">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="City">
@@ -684,6 +692,7 @@
           <FunctionImportMapping FunctionImportName="Shopping_list_proc" FunctionName="ProductListDBModel.Store.Shopping_list_proc" >
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateProductAmount" FunctionName="ProductListDBModel.Store.UpdateProductAmount" />
+          <FunctionImportMapping FunctionImportName="RegisterUser" FunctionName="ProductListDBModel.Store.RegisterUser" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

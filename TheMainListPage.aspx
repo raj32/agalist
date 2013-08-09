@@ -35,9 +35,26 @@
         ga('send', 'pageview');
 
     </script>
+
+    <script type="text/javascript">
+      function funfordefautenterkey1(btn, event) {
+        alert('Hi');
+        event.preventDefault();
+           $("div > .errorsdiv").show('slow');
+          if (document.all) {
+              if (event.keyCode == 13) {
+                  event.returnValue = false;
+                  event.cancel = true;
+                  btn.click();
+              }
+         }                
+    </script>
+
     <div style="background: white; direction: rtl; float: left; width: 760px;">
-        <asp:Button ID="AdminEnterButton" runat="server" Text="מנהל המערכת" CssClass="BtnClass"
-                                        Width="150px" OnClick="EnterAdminPage_Click" />
+        <div style="margin:10px;">
+        <asp:LinkButton ID="AdminEnterButton" runat="server" Text="מנהל המערכת"
+                                        Width="120px" OnClick="EnterAdminPage_Click" />
+        </div>
         <div class="CentralPanelDiv">
             <div class="InsideCenterDiv">
                 <div class="CenterOfCenterPageDiv">
