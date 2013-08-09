@@ -21,6 +21,10 @@ public partial class TheMainListPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {    
         int lIsAdmin = 0;
+
+        tbxFindProduct.Attributes.Add("onkeydown", "funfordefautenterkey1(" + btnAddToList.ClientID + ",event)");
+
+        
         HttpContext.Current.Response.AddHeader("p3p", "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"");
         try
         {

@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -253,6 +254,7 @@ namespace ProductListDBModel
         private ObjectSet<Store> _Stores;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -344,6 +346,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Function Imports
     
         /// <summary>
@@ -405,13 +408,43 @@ namespace ProductListDBModel
     
             return base.ExecuteFunction("UpdateProductAmount", product_idParameter, amountParameter, useridParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="email">No Metadata Documentation available.</param>
+        /// <param name="password">No Metadata Documentation available.</param>
+        public int RegisterUser(global::System.String email, global::System.String password)
+        {
+            ObjectParameter emailParameter;
+            if (email != null)
+            {
+                emailParameter = new ObjectParameter("email", email);
+            }
+            else
+            {
+                emailParameter = new ObjectParameter("email", typeof(global::System.String));
+            }
+    
+            ObjectParameter passwordParameter;
+            if (password != null)
+            {
+                passwordParameter = new ObjectParameter("password", password);
+            }
+            else
+            {
+                passwordParameter = new ObjectParameter("password", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("RegisterUser", emailParameter, passwordParameter);
+        }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -436,6 +469,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -490,6 +524,7 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
+
     
     }
     
@@ -517,6 +552,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -763,6 +799,7 @@ namespace ProductListDBModel
         partial void Onis_adminChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -833,6 +870,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -857,6 +895,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -983,6 +1022,7 @@ namespace ProductListDBModel
         partial void Onadd_numChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1009,6 +1049,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1033,6 +1074,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1111,6 +1153,7 @@ namespace ProductListDBModel
         partial void Onmeasure_unit_idChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1219,6 +1262,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1243,6 +1287,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1393,6 +1438,7 @@ namespace ProductListDBModel
         partial void Onupdated_by_user_idChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1435,6 +1481,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1461,6 +1508,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1563,6 +1611,7 @@ namespace ProductListDBModel
         partial void Oncity_nameChanged();
 
         #endregion
+
     
     }
     
@@ -1588,6 +1637,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1738,6 +1788,7 @@ namespace ProductListDBModel
         partial void Onfree_textChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1818,6 +1869,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1846,6 +1898,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1996,6 +2049,7 @@ namespace ProductListDBModel
         partial void Onsave_dateChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2076,6 +2130,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2100,6 +2155,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2346,6 +2402,7 @@ namespace ProductListDBModel
         partial void OnCOORDINATE_YChanged();
 
         #endregion
+
     
     }
     
@@ -2375,6 +2432,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2501,6 +2559,7 @@ namespace ProductListDBModel
         partial void OndefinitionChanged();
 
         #endregion
+
     
     }
     
@@ -2526,6 +2585,7 @@ namespace ProductListDBModel
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2652,6 +2712,7 @@ namespace ProductListDBModel
         partial void Onuser_idChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2694,9 +2755,11 @@ namespace ProductListDBModel
         }
 
         #endregion
+
     }
 
     #endregion
+
     #region ComplexTypes
     
     /// <summary>
@@ -2734,8 +2797,10 @@ namespace ProductListDBModel
         partial void Onproduct_list_lineChanged();
 
         #endregion
+
     }
 
     #endregion
+
     
 }

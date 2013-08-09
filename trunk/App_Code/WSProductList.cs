@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-
 using System.Web.Security;
-
 using ProductListDBModel;
 using System.Data.SqlClient;
 using System.Net;
@@ -66,9 +64,11 @@ public class WSProductList : System.Web.Services.WebService {
         if (andregid!=null) 
         {
             var push = new PushBroker();
+            String json = "just some text";
+            //String json = @"{""event"":""UpdateAmount"",""product_id"":"+product_id.ToString()+",""amount"":"""+product_id.ToString()+""",""amount"":"""+product_id.ToString()+"""}";
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ"));
             push.QueueNotification(new GcmNotification().ForDeviceRegistrationId(andregid)
-                              .WithJson(@"{""alert"":""Hello World!"",""badge"":7,""sound"":""sound.caf""}"));
+                              .WithJson(json));
             push.StopAllServices();
         }
         
@@ -97,5 +97,18 @@ public class WSProductList : System.Web.Services.WebService {
                               .WithJson(@"{""alert"":""Hello World!"",""badge"":7,""sound"":""sound.caf""}"));
                                 
         push.StopAllServices();
+    }
+
+    [WebMethod]
+    public int RegisterUser(String email, String password)
+    {
+        int result ;
+        try
+        {
+            result = DBHandler.GetInstance().RegisterUser(email, password);
+        }
+        catch (Exception) { result = 3333; }
+
+        return result;
     }
 }
