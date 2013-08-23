@@ -115,6 +115,21 @@ namespace ProductListDBModel
             }
         }
 
+        //------------------------------------------------------------------//
+
+        public static int isExistsUser(string username)
+        {
+            try
+            {
+                int myClient = (from db in DBHandler.GetInstanceProp.Clients where db.email == username select db.user_id).First<int>();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         //-----------------------------------------------------------------//
 
         public static String getAllTips

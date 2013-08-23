@@ -365,6 +365,7 @@ public partial class TheMainListPage : System.Web.UI.Page
             DBHandler.GetInstance().Shopping_List.DeleteObject(arrShoppingList[i]);
         }
         DBHandler.GetInstance().SaveChanges();
+        tbxSaveNewList.Text = "";
         
     }
     protected void EnterAdminPage_Click(object sender, EventArgs e)

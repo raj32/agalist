@@ -42,7 +42,7 @@ public class WSProductList : System.Web.Services.WebService {
         catch(Exception) { }
 
         if (result.Count == 0)
-            result.Add("14~p~Error Executing Query~p~7~p~במשקל~p~0~p~0.5~p~0~n~");
+            result.Add("14~p~הרשימה ריקה. התחל להזין מוצרים~p~0~p~במשקל~p~0~p~0.5~p~0~n~");
         return result;
     }
 
@@ -100,15 +100,45 @@ public class WSProductList : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public int RegisterUser(String email, String password)
+    public int RegisterUser(String username, String password)
     {
-        int result ;
+        int result = 0;
         try
         {
-            result = DBHandler.GetInstance().RegisterUser(email, password);
+            result = DBUtils.isExistsUser(username);
+
+            if (result == 0)
+            {
+                DBHandler.GetInstance().RegisterUser(username, password);
+                result = DBUtils.getUserId(username, password);
+            }
+            else
+            {
+                result = -1;
+            }
         }
-        catch (Exception) { result = 3333; }
+        catch (Exception e) { result = -2; }
 
         return result;
     }
+
+        [WebMethod]
+    public int PasswordReminder(String username)
+    {
+        int result = 0;
+        try
+        {
+            result = DBUtils.isExistsUser(username);
+
+            if (result == 1)
+            {
+                AgaMail myMail = new AgaMail(username, MailKind.PasswordReminder);
+                myMail.ExecuteSending();
+            }
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+       
 }
