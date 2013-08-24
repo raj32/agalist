@@ -20,9 +20,9 @@ public partial class TheMainListPage : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {    
-        int lIsAdmin = 0;
+        //int lIsAdmin = 0;
 
-        tbxFindProduct.Attributes.Add("onkeydown", "funfordefautenterkey1(" + btnAddToList.ClientID + ",event)");
+       // tbxFindProduct.Attributes.Add("onkeydown", "funfordefautenterkey1(" + btnAddToList.ClientID + ",event)");
 
         
         HttpContext.Current.Response.AddHeader("p3p", "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"");
@@ -54,17 +54,17 @@ public partial class TheMainListPage : System.Web.UI.Page
         lblSaveNewList.Text = "";
         AdminEnterButton.Visible = false;
 
-        try
-        {
-            lIsAdmin =  (from b in myDBhandler.Clients where b.user_id == userID select b.is_admin).First<int>();
-        }
-        catch(Exception ex) {
-            lIsAdmin = 0;
-        };
-        if (lIsAdmin == 1) 
-        {
-            AdminEnterButton.Visible = true;
-        }
+        //try
+        //{
+        //    lIsAdmin =  (from b in myDBhandler.Clients where b.user_id == userID select b.is_admin).First<int>();
+        //}
+        //catch(Exception ex) {
+        //    lIsAdmin = 0;
+        //};
+        //if (lIsAdmin == 1) 
+        //{
+        //    AdminEnterButton.Visible = true;
+        //}
 
     }
 

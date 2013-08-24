@@ -62,7 +62,7 @@
           <Property Name="address" Type="varchar" MaxLength="100" />
           <Property Name="update_date_shop_list" Type="date" />
           <Property Name="comments" Type="varchar" MaxLength="250" />
-          <Property Name="is_admin" Type="int" Nullable="false" />
+          <Property Name="is_admin" Type="int" />
         </EntityType>
         <EntityType Name="Measures">
           <Key>
@@ -135,9 +135,6 @@
           <Property Name="street" Type="nchar" MaxLength="100" />
           <Property Name="number" Type="int" />
           <Property Name="sector_id" Type="int" />
-          <Property Name="Address" Type="nchar" MaxLength="500" />
-          <Property Name="COORDINATE_X" Type="float" />
-          <Property Name="COORDINATE_Y" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -232,10 +229,6 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="RegisterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="Shopping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="luser" Type="int" Mode="In" />
         </Function>
@@ -536,9 +529,6 @@
           <Property Type="String" Name="street" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="number" />
           <Property Type="Int32" Name="sector_id" />
-          <Property Type="String" Name="Address" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Type="Double" Name="COORDINATE_X" />
-          <Property Type="Double" Name="COORDINATE_Y" />
         </EntityType>
         <Association Name="Product_in_storeProduct">
           <End Type="ProductListDBModel.Product_in_store" Role="Product_in_store" Multiplicity="*" />
@@ -676,9 +666,6 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="ProductListDBModel.Store">
               <MappingFragment StoreEntitySet="Stores">
-                <ScalarProperty Name="COORDINATE_Y" ColumnName="COORDINATE_Y" />
-                <ScalarProperty Name="COORDINATE_X" ColumnName="COORDINATE_X" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="sector_id" ColumnName="sector_id" />
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="street" ColumnName="street" />
@@ -692,7 +679,6 @@
           <FunctionImportMapping FunctionImportName="Shopping_list_proc" FunctionName="ProductListDBModel.Store.Shopping_list_proc" >
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateProductAmount" FunctionName="ProductListDBModel.Store.UpdateProductAmount" />
-          <FunctionImportMapping FunctionImportName="RegisterUser" FunctionName="ProductListDBModel.Store.RegisterUser" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -762,7 +748,7 @@
         <EntityTypeShape EntityType="ProductListDBModel.sysdiagram" Width="1.5" PointX="2.875" PointY="8.25" Height="1.9802864583333317" />
         <EntityTypeShape EntityType="ProductListDBModel.Product_in_store" Width="1.5" PointX="4.375" PointY="4.75" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="ProductListDBModel.Sector" Width="1.5" PointX="6.375" PointY="6.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="ProductListDBModel.Store" Width="1.5" PointX="8.375" PointY="6.75" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ProductListDBModel.Store" Width="1.5" PointX="8.375" PointY="6.75" Height="2.3648893229166656" />
         <AssociationConnector Association="ProductListDBModel.Product_in_storeProduct">
           <ConnectorPoint PointX="4.75" PointY="4.75" />
           <ConnectorPoint PointX="4.75" PointY="2.864889322916667" />

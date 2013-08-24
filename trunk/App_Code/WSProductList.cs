@@ -64,7 +64,7 @@ public class WSProductList : System.Web.Services.WebService {
         if (andregid!=null) 
         {
             var push = new PushBroker();
-            String json = "just some text";
+            String json = @"{""event"":""UpdateAmount""}";
             //String json = @"{""event"":""UpdateAmount"",""product_id"":"+product_id.ToString()+",""amount"":"""+product_id.ToString()+""",""amount"":"""+product_id.ToString()+"""}";
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyAVx_czZItZXcmIQHcw4TauzV9g1mertaQ"));
             push.QueueNotification(new GcmNotification().ForDeviceRegistrationId(andregid)

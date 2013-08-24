@@ -37,17 +37,18 @@
     </script>
 
     <script type="text/javascript">
-      function funfordefautenterkey1(btn, event) {
-        alert('Hi');
-        event.preventDefault();
-           $("div > .errorsdiv").show('slow');
-          if (document.all) {
-              if (event.keyCode == 13) {
-                  event.returnValue = false;
-                  event.cancel = true;
-                  btn.click();
-              }
-         }                
+        function funfordefautenterkey1(btn, event) {
+            alert('Hi');
+            event.preventDefault();
+            $("div > .errorsdiv").show('slow');
+            if (document.all) {
+                if (event.keyCode == 13) {
+                    event.returnValue = false;
+                    event.cancel = true;
+                    btn.click();
+                }
+            }
+        }                        
     </script>
 
     <div style="background: white; direction: rtl; float: left; width: 760px;">
