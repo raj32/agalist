@@ -141,6 +141,23 @@ namespace ProductListDBModel
             
         }
 
+        //------------------------------------------------------------------//
+
+        public static int isExistsUser(string username)
+        {
+            try
+            {
+                int myClient = (from db in DBHandler.GetInstanceProp.Clients where db.email == username select db.user_id).First<int>();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        //-----------------------------------------------------------------//
+
         static String allTips()
         {
             
@@ -197,7 +214,7 @@ namespace ProductListDBModel
             {
                 string currentRegId = (from b in DBHandler.GetInstanceProp.Clients where b.user_id == userId select b.comments).First<string>();
 
-                if (currentRegId != androidRegId)
+                if (currentRegId != androidRegId && androidRegId != "")
                 {
                     Client myObject = (from b in DBHandler.GetInstanceProp.Clients where b.user_id == userId select b).First<Client>();
                     myObject.comments = androidRegId;
