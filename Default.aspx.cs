@@ -93,6 +93,7 @@ public partial class _Default : System.Web.UI.Page
                 username = item.email.Split('@')[0];
                 FormsAuthentication.RedirectFromLoginPage(username, false);
                 IEnumerable<Client> updClient = from b in arrClients where b.email == l_email select b;       //Find exact client that loggedin and update it's last login date.
+                Response.Cookies["UserIdNew"].Domain = ".agalist.com";
                 Response.Cookies["UserIdNew"].Value = item.user_id.ToString();
                 Response.Cookies["UserIdNew"].Expires = DateTime.Now.AddDays(364);
                 updClient.First<Client>().last_login_date = DateTime.Now;

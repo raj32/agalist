@@ -99,7 +99,9 @@ public class WSProductList : System.Web.Services.WebService {
         push.StopAllServices();
     }
 
-    [WebMethod]
+
+
+    [WebMethod] // Fucked up by Vova
     public int RegisterUser(String username, String password)
     {
         int result = 0;
@@ -109,8 +111,8 @@ public class WSProductList : System.Web.Services.WebService {
 
             if (result == 0)
             {
-                DBHandler.GetInstance().RegisterUser(username, password);
-                result = DBUtils.getUserId(username, password);
+               // DBHandler.GetInstance().RegisterUser(username, password);
+                //result = DBUtils.getUserId(username, password);
             }
             else
             {
@@ -122,7 +124,7 @@ public class WSProductList : System.Web.Services.WebService {
         return result;
     }
 
-        [WebMethod]
+    [WebMethod]
     public int PasswordReminder(String username)
     {
         int result = 0;
@@ -140,5 +142,4 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
-       
 }
