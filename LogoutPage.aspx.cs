@@ -9,6 +9,7 @@ public partial class LogoutPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Response.Cookies["UserIdNew"].Domain = "agalist.com";
        Response.Cookies["UserIdNew"].Expires = DateTime.Now.AddDays(-1);
        Response.Redirect("Default.aspx");
     }
