@@ -100,7 +100,7 @@
                                     <div style="float: right; background-color: White; width: 90%;">
                                         <asp:Panel ID="GridViewPanel" runat="server" DefaultButton="btnAddNewProduct">
                                           <div style="width:486px; height:500px" >
-                                                <iframe id="jagalistTable" height="500px" width="507px" src="http://tomcat.agalist.com/Jagalist.html" style="overflow:auto; direction:ltr;overflow-x:hidden;overflow-y:scroll;border:1px;">
+                                                <iframe id="jagalistTable" height="500px" width="507px" src="http://jagalist.agalist.com/Jagalist.html" style="overflow:auto; direction:ltr;overflow-x:hidden;overflow-y:scroll;border:1px;">
                                                 </iframe>
                                           </div>
                                             <div style="float: right; width: 495px;">
