@@ -24,8 +24,6 @@ public class WSProductList : System.Web.Services.WebService {
     
     ProdListDBEntities myDBhandler = DBHandler.GetInstance();
     int userID = 0;
-    
-            
 
     public WSProductList () {
 
@@ -100,9 +98,8 @@ public class WSProductList : System.Web.Services.WebService {
     }
 
 
-
-    [WebMethod] // Fucked up by Vova
-    public int RegisterUser(String username, String password)
+    [WebMethod] 
+    public int RegisterUser(String username, String password,int client_type)
     {
         int result = 0;
         try
@@ -111,8 +108,8 @@ public class WSProductList : System.Web.Services.WebService {
 
             if (result == 0)
             {
-               // DBHandler.GetInstance().RegisterUser(username, password);
-                //result = DBUtils.getUserId(username, password);
+                DBHandler.GetInstance().registeruser(username,password,client_type);
+               result = DBUtils.getUserId(username, password);
             }
             else
             {
@@ -124,6 +121,7 @@ public class WSProductList : System.Web.Services.WebService {
         return result;
     }
 
+    
     [WebMethod]
     public int PasswordReminder(String username)
     {
@@ -142,4 +140,60 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
+
+    [WebMethod]
+    public int InsertStore(int userId,String store_name, float coordinate_x,float coordinate_y)
+    {
+
+        int result = 0;
+        try
+        {
+            DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+
+    [WebMethod]
+    public int UpdateStore(int userId, int store_id,String store_name, float coordinate_x, float coordinate_y)
+    {
+
+        int result = 0;
+        try
+        {
+            //   DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+    [WebMethod]
+    public String StoreList(int userId)
+    {
+
+        String result = "";
+        try
+        {
+            //   DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
+        }
+        catch (Exception e) { result = "ERR"; }
+
+        return result;
+    }
+
+    [WebMethod]
+    public int testheb(String stam)
+    {
+
+        int result = 0;
+        try
+        {
+            DBHandler.GetInstance().test_heb_proc(stam);
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+
 }

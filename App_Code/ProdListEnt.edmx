@@ -7,6 +7,7 @@
     <Schema Namespace="ProductListDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ProductListDBModelStoreContainer">
           <EntitySet Name="Cities" EntityType="ProductListDBModel.Store.Cities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="client_to_store_relations" EntityType="ProductListDBModel.Store.client_to_store_relations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Clients" EntityType="ProductListDBModel.Store.Clients" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Measures" EntityType="ProductListDBModel.Store.Measures" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Product_in_store" EntityType="ProductListDBModel.Store.Product_in_store" store:Type="Tables" Schema="dbo" />
@@ -49,6 +50,16 @@
           <Property Name="city_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="city_name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="client_to_store_relations">
+          <Key>
+            <PropertyRef Name="client_store_rel_id" />
+          </Key>
+          <Property Name="client_store_rel_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="store_id" Type="int" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="comments" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="user_id" />
@@ -63,6 +74,7 @@
           <Property Name="update_date_shop_list" Type="date" />
           <Property Name="comments" Type="varchar" MaxLength="250" />
           <Property Name="is_admin" Type="int" />
+          <Property Name="client_type" Type="int" />
         </EntityType>
         <EntityType Name="Measures">
           <Key>
@@ -129,12 +141,14 @@
             <PropertyRef Name="store_id" />
           </Key>
           <Property Name="store_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="store_name" Type="nchar" MaxLength="50" />
+          <Property Name="store_name" Type="nvarchar" MaxLength="50" />
           <Property Name="store_chain_id" Type="int" />
           <Property Name="city_id" Type="int" />
           <Property Name="street" Type="nchar" MaxLength="100" />
           <Property Name="number" Type="int" />
           <Property Name="sector_id" Type="int" />
+          <Property Name="coordinate_X" Type="float" />
+          <Property Name="coordinate_y" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -229,6 +243,17 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="store_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="coordinate_x" Type="float" Mode="In" />
+          <Parameter Name="coordinate_y" Type="float" Mode="In" />
+        </Function>
+        <Function Name="registeruser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="client_type" Type="int" Mode="In" />
+        </Function>
         <Function Name="Shopping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="luser" Type="int" Mode="In" />
         </Function>
@@ -267,6 +292,12 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="StoredProcedure1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="luser" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="StoreList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="luser" Type="int" Mode="In" />
+        </Function>
+        <Function Name="test_heb_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parameter1" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UpdateProductAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="product_id" Type="int" Mode="In" />
@@ -325,9 +356,23 @@
             <Parameter Name="amount" Mode="In" Type="Double" />
             <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RegisterUser">
+          <FunctionImport Name="registeruser">
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="client_type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="client_to_store_relations" EntityType="ProductListDBModel.client_to_store_relations" />
+          <FunctionImport Name="InsertStore">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="store_name" Mode="In" Type="String" />
+            <Parameter Name="coordinate_x" Mode="In" Type="Double" />
+            <Parameter Name="coordinate_y" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="test_heb_proc">
+          <Parameter Name="parameter1" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="StoreList" ReturnType="Collection(String)">
+            <Parameter Name="luser" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="City">
@@ -354,6 +399,7 @@
           <NavigationProperty Name="Shopping_List_Hist" Relationship="ProductListDBModel.FK_Shopping_List_Hist_Clients" FromRole="Client" ToRole="Shopping_List_Hist" />
           <NavigationProperty Name="Tips" Relationship="ProductListDBModel.FK_Tips_Clients" FromRole="Client" ToRole="Tip" />
           <Property Type="Int32" Name="is_admin" Nullable="false" />
+          <Property Type="Int32" Name="client_type" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -529,6 +575,8 @@
           <Property Type="String" Name="street" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="number" />
           <Property Type="Int32" Name="sector_id" />
+          <Property Type="Double" Name="coordinate_X" />
+          <Property Type="Double" Name="coordinate_y" />
         </EntityType>
         <Association Name="Product_in_storeProduct">
           <End Type="ProductListDBModel.Product_in_store" Role="Product_in_store" Multiplicity="*" />
@@ -545,6 +593,16 @@
         <ComplexType Name="Shopping_list_proc_Result">
           <Property Type="Double" Name="product_list_line" Nullable="true" />
         </ComplexType>
+        <EntityType Name="client_to_store_relations">
+          <Key>
+            <PropertyRef Name="client_store_rel_id" />
+          </Key>
+          <Property Type="Int32" Name="client_store_rel_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="user_id" />
+          <Property Type="Int32" Name="store_id" />
+          <Property Type="DateTime" Name="create_date" />
+          <Property Type="String" Name="comments" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -562,6 +620,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="ProductListDBModel.Client">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="client_type" ColumnName="client_type" />
                 <ScalarProperty Name="is_admin" ColumnName="is_admin" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="update_date_shop_list" ColumnName="update_date_shop_list" />
@@ -666,6 +725,8 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="ProductListDBModel.Store">
               <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="coordinate_y" ColumnName="coordinate_y" />
+                <ScalarProperty Name="coordinate_X" ColumnName="coordinate_X" />
                 <ScalarProperty Name="sector_id" ColumnName="sector_id" />
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="street" ColumnName="street" />
@@ -679,6 +740,21 @@
           <FunctionImportMapping FunctionImportName="Shopping_list_proc" FunctionName="ProductListDBModel.Store.Shopping_list_proc" >
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateProductAmount" FunctionName="ProductListDBModel.Store.UpdateProductAmount" />
+          <FunctionImportMapping FunctionImportName="registeruser" FunctionName="ProductListDBModel.Store.registeruser" />
+          <EntitySetMapping Name="client_to_store_relations">
+            <EntityTypeMapping TypeName="ProductListDBModel.client_to_store_relations">
+              <MappingFragment StoreEntitySet="client_to_store_relations">
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="client_store_rel_id" ColumnName="client_store_rel_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertStore" FunctionName="ProductListDBModel.Store.InsertStore" />
+          <FunctionImportMapping FunctionImportName="test_heb_proc" FunctionName="ProductListDBModel.Store.test_heb_proc" />
+          <FunctionImportMapping FunctionImportName="StoreList" FunctionName="ProductListDBModel.Store.StoreList" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -710,10 +786,10 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="ProductListDBModel.Shopping_List" Width="1.5" PointX="5.75" PointY="1.5" Height="2.3648893229166661" />
         <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Clients" >
-          <ConnectorPoint PointX="3.25" PointY="3.3961393229166661" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="3.3961393229166656" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="3.3961393229166661" />
-          <ConnectorPoint PointX="5.75" PointY="3.3961393229166661" />
+          <ConnectorPoint PointX="3.25" PointY="3.4922900390625" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="3.4922900390624996" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="3.4922900390625" />
+          <ConnectorPoint PointX="5.75" PointY="3.4922900390625" />
         </AssociationConnector>
         <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Products" >
           <ConnectorPoint PointX="5.125" PointY="2.1824446614583333" />
@@ -721,10 +797,10 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="ProductListDBModel.Shopping_List_Hist" Width="1.5" PointX="8" PointY="2.875" Height="2.5571907552083326" />
         <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Hist_Clients" >
-          <ConnectorPoint PointX="3.25" PointY="4.259366803385416" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="4.2593668033854151" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="4.259366803385416" />
-          <ConnectorPoint PointX="8" PointY="4.259366803385416" />
+          <ConnectorPoint PointX="3.25" PointY="4.517855169677734" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="4.5178551696777332" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="4.517855169677734" />
+          <ConnectorPoint PointX="8" PointY="4.517855169677734" />
         </AssociationConnector>
         <AssociationConnector Association="ProductListDBModel.FK_Shopping_List_Hist_Products" >
           <ConnectorPoint PointX="5.125" PointY="0.53125" />
@@ -733,16 +809,14 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="ProductListDBModel.Tip" Width="1.5" PointX="10.625" PointY="0.5" Height="2.1725878906249996" />
         <AssociationConnector Association="ProductListDBModel.FK_Tips_Clients" >
-          <ConnectorPoint PointX="3.25" PointY="4.0621255631510405" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="4.06212556315104" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="4.0621255631510405" />
-          <ConnectorPoint PointX="7.75" PointY="4.0621255631510405" />
-          <ConnectorPoint PointX="7.75" PointY="2.8552864583333339" />
-          <ConnectorPoint PointX="9.5" PointY="2.8552864583333339" />
-          <ConnectorPoint PointX="9.5" PointY="2.625" />
-          <ConnectorPoint PointX="10.375" PointY="2.625" />
-          <ConnectorPoint PointX="10.375" PointY="2.9225878906249996" />
-          <ConnectorPoint PointX="11.375" PointY="2.9225878906249996" />
+          <ConnectorPoint PointX="3.25" PointY="4.2875204624430321" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="4.2875204624430312" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="4.2875204624430321" />
+          <ConnectorPoint PointX="7.9375" PointY="4.2875204624430321" />
+          <ConnectorPoint PointX="7.9375" PointY="2.8600878906250005" />
+          <ConnectorPoint PointX="9.3125" PointY="2.8600878906250005" />
+          <ConnectorPoint PointX="9.3125" PointY="2.8125" />
+          <ConnectorPoint PointX="11.375" PointY="2.8125" />
           <ConnectorPoint PointX="11.375" PointY="2.6725878906249996" />
         </AssociationConnector>
         <EntityTypeShape EntityType="ProductListDBModel.sysdiagram" Width="1.5" PointX="2.875" PointY="8.25" Height="1.9802864583333317" />
@@ -753,6 +827,7 @@
           <ConnectorPoint PointX="4.75" PointY="4.75" />
           <ConnectorPoint PointX="4.75" PointY="2.864889322916667" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="ProductListDBModel.client_to_store_relations" Width="1.5" PointX="0.75" PointY="6.5" Height="1.9802864583333317" />
         </Diagram>
     </Diagrams>
   </Designer>

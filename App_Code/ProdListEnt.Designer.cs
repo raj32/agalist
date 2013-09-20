@@ -252,6 +252,22 @@ namespace ProductListDBModel
             }
         }
         private ObjectSet<Store> _Stores;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<client_to_store_relations> client_to_store_relations
+        {
+            get
+            {
+                if ((_client_to_store_relations == null))
+                {
+                    _client_to_store_relations = base.CreateObjectSet<client_to_store_relations>("client_to_store_relations");
+                }
+                return _client_to_store_relations;
+            }
+        }
+        private ObjectSet<client_to_store_relations> _client_to_store_relations;
 
         #endregion
 
@@ -344,6 +360,14 @@ namespace ProductListDBModel
         {
             base.AddObject("Stores", store);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the client_to_store_relations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToclient_to_store_relations(client_to_store_relations client_to_store_relations)
+        {
+            base.AddObject("client_to_store_relations", client_to_store_relations);
+        }
 
         #endregion
 
@@ -414,7 +438,8 @@ namespace ProductListDBModel
         /// </summary>
         /// <param name="email">No Metadata Documentation available.</param>
         /// <param name="password">No Metadata Documentation available.</param>
-        public int RegisterUser(global::System.String email, global::System.String password)
+        /// <param name="client_type">No Metadata Documentation available.</param>
+        public int registeruser(global::System.String email, global::System.String password, Nullable<global::System.Int32> client_type)
         {
             ObjectParameter emailParameter;
             if (email != null)
@@ -436,7 +461,107 @@ namespace ProductListDBModel
                 passwordParameter = new ObjectParameter("password", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction("RegisterUser", emailParameter, passwordParameter);
+            ObjectParameter client_typeParameter;
+            if (client_type.HasValue)
+            {
+                client_typeParameter = new ObjectParameter("client_type", client_type);
+            }
+            else
+            {
+                client_typeParameter = new ObjectParameter("client_type", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("registeruser", emailParameter, passwordParameter, client_typeParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userId">No Metadata Documentation available.</param>
+        /// <param name="store_name">No Metadata Documentation available.</param>
+        /// <param name="coordinate_x">No Metadata Documentation available.</param>
+        /// <param name="coordinate_y">No Metadata Documentation available.</param>
+        public int InsertStore(Nullable<global::System.Int32> userId, global::System.String store_name, Nullable<global::System.Double> coordinate_x, Nullable<global::System.Double> coordinate_y)
+        {
+            ObjectParameter userIdParameter;
+            if (userId.HasValue)
+            {
+                userIdParameter = new ObjectParameter("userId", userId);
+            }
+            else
+            {
+                userIdParameter = new ObjectParameter("userId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter store_nameParameter;
+            if (store_name != null)
+            {
+                store_nameParameter = new ObjectParameter("store_name", store_name);
+            }
+            else
+            {
+                store_nameParameter = new ObjectParameter("store_name", typeof(global::System.String));
+            }
+    
+            ObjectParameter coordinate_xParameter;
+            if (coordinate_x.HasValue)
+            {
+                coordinate_xParameter = new ObjectParameter("coordinate_x", coordinate_x);
+            }
+            else
+            {
+                coordinate_xParameter = new ObjectParameter("coordinate_x", typeof(global::System.Double));
+            }
+    
+            ObjectParameter coordinate_yParameter;
+            if (coordinate_y.HasValue)
+            {
+                coordinate_yParameter = new ObjectParameter("coordinate_y", coordinate_y);
+            }
+            else
+            {
+                coordinate_yParameter = new ObjectParameter("coordinate_y", typeof(global::System.Double));
+            }
+    
+            return base.ExecuteFunction("InsertStore", userIdParameter, store_nameParameter, coordinate_xParameter, coordinate_yParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="parameter1">No Metadata Documentation available.</param>
+        public int test_heb_proc(global::System.String parameter1)
+        {
+            ObjectParameter parameter1Parameter;
+            if (parameter1 != null)
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", parameter1);
+            }
+            else
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("test_heb_proc", parameter1Parameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="luser">No Metadata Documentation available.</param>
+        public ObjectResult<global::System.String> StoreList(Nullable<global::System.Int32> luser)
+        {
+            ObjectParameter luserParameter;
+            if (luser.HasValue)
+            {
+                luserParameter = new ObjectParameter("luser", luser);
+            }
+            else
+            {
+                luserParameter = new ObjectParameter("luser", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<global::System.String>("StoreList", luserParameter);
         }
 
         #endregion
@@ -797,6 +922,30 @@ namespace ProductListDBModel
         private global::System.Int32 _is_admin;
         partial void Onis_adminChanging(global::System.Int32 value);
         partial void Onis_adminChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> client_type
+        {
+            get
+            {
+                return _client_type;
+            }
+            set
+            {
+                Onclient_typeChanging(value);
+                ReportPropertyChanging("client_type");
+                _client_type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("client_type");
+                Onclient_typeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _client_type;
+        partial void Onclient_typeChanging(Nullable<global::System.Int32> value);
+        partial void Onclient_typeChanged();
 
         #endregion
 
@@ -871,6 +1020,159 @@ namespace ProductListDBModel
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ProductListDBModel", Name="client_to_store_relations")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class client_to_store_relations : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new client_to_store_relations object.
+        /// </summary>
+        /// <param name="client_store_rel_id">Initial value of the client_store_rel_id property.</param>
+        public static client_to_store_relations Createclient_to_store_relations(global::System.Int32 client_store_rel_id)
+        {
+            client_to_store_relations client_to_store_relations = new client_to_store_relations();
+            client_to_store_relations.client_store_rel_id = client_store_rel_id;
+            return client_to_store_relations;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 client_store_rel_id
+        {
+            get
+            {
+                return _client_store_rel_id;
+            }
+            set
+            {
+                if (_client_store_rel_id != value)
+                {
+                    Onclient_store_rel_idChanging(value);
+                    ReportPropertyChanging("client_store_rel_id");
+                    _client_store_rel_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("client_store_rel_id");
+                    Onclient_store_rel_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _client_store_rel_id;
+        partial void Onclient_store_rel_idChanging(global::System.Int32 value);
+        partial void Onclient_store_rel_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> user_id
+        {
+            get
+            {
+                return _user_id;
+            }
+            set
+            {
+                Onuser_idChanging(value);
+                ReportPropertyChanging("user_id");
+                _user_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("user_id");
+                Onuser_idChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _user_id;
+        partial void Onuser_idChanging(Nullable<global::System.Int32> value);
+        partial void Onuser_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> store_id
+        {
+            get
+            {
+                return _store_id;
+            }
+            set
+            {
+                Onstore_idChanging(value);
+                ReportPropertyChanging("store_id");
+                _store_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("store_id");
+                Onstore_idChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _store_id;
+        partial void Onstore_idChanging(Nullable<global::System.Int32> value);
+        partial void Onstore_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> create_date
+        {
+            get
+            {
+                return _create_date;
+            }
+            set
+            {
+                Oncreate_dateChanging(value);
+                ReportPropertyChanging("create_date");
+                _create_date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("create_date");
+                Oncreate_dateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _create_date;
+        partial void Oncreate_dateChanging(Nullable<global::System.DateTime> value);
+        partial void Oncreate_dateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String comments
+        {
+            get
+            {
+                return _comments;
+            }
+            set
+            {
+                OncommentsChanging(value);
+                ReportPropertyChanging("comments");
+                _comments = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("comments");
+                OncommentsChanged();
+            }
+        }
+        private global::System.String _comments;
+        partial void OncommentsChanging(global::System.String value);
+        partial void OncommentsChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>
@@ -2328,6 +2630,54 @@ namespace ProductListDBModel
         private Nullable<global::System.Int32> _sector_id;
         partial void Onsector_idChanging(Nullable<global::System.Int32> value);
         partial void Onsector_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> coordinate_X
+        {
+            get
+            {
+                return _coordinate_X;
+            }
+            set
+            {
+                Oncoordinate_XChanging(value);
+                ReportPropertyChanging("coordinate_X");
+                _coordinate_X = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("coordinate_X");
+                Oncoordinate_XChanged();
+            }
+        }
+        private Nullable<global::System.Double> _coordinate_X;
+        partial void Oncoordinate_XChanging(Nullable<global::System.Double> value);
+        partial void Oncoordinate_XChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> coordinate_y
+        {
+            get
+            {
+                return _coordinate_y;
+            }
+            set
+            {
+                Oncoordinate_yChanging(value);
+                ReportPropertyChanging("coordinate_y");
+                _coordinate_y = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("coordinate_y");
+                Oncoordinate_yChanged();
+            }
+        }
+        private Nullable<global::System.Double> _coordinate_y;
+        partial void Oncoordinate_yChanging(Nullable<global::System.Double> value);
+        partial void Oncoordinate_yChanged();
 
         #endregion
 
