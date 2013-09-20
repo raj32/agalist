@@ -372,4 +372,13 @@ public partial class TheMainListPage : System.Web.UI.Page
     {
         Response.Redirect("~/AdminPage.aspx");
     }
+
+    protected void PDF_Click(object sender, EventArgs e)
+    {
+        PdfWriterAgalist pdfObj = new PdfWriterAgalist();
+
+        pdfObj.Test();
+
+
+    }
 }

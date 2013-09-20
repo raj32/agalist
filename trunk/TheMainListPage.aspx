@@ -5,7 +5,7 @@
 <asp:Content ID="MainListPage" runat="server" ContentPlaceHolderID="CentralPlaceHolder">
     <script type="text/javascript">
         window.onload = function() {
-            document.getElementById("jagalistTable").contentWindow.postMessage("", "http://agalist.com:8080");
+            document.getElementById("jagalistTable").contentWindow.postMessage("", "http://jagadev.agalist.tk");
         };
 
         $(document).change(function () {
@@ -101,7 +101,7 @@
                                     <div style="float: right; background-color: White; width: 90%;">
                                         <asp:Panel ID="GridViewPanel" runat="server" DefaultButton="btnAddNewProduct">
                                           <div style="width:486px; height:500px" >
-                                                <iframe id="jagalistTable" height="500px" width="507px" src="http://jagalist.agalist.com/Jagalist.html" style="overflow:auto; direction:ltr;overflow-x:hidden;overflow-y:scroll;border:1px;">
+                                                <iframe id="jagalistTable" height="500px" width="507px" src="http://jagadev.agalist.tk/Jagalist.html" style="overflow:auto; direction:ltr;overflow-x:hidden;overflow-y:scroll;border:1px;">
                                                 </iframe>
                                           </div>
                                             <div style="float: right; width: 495px;">
@@ -117,6 +117,9 @@
                                                 &nbsp
                                                 <asp:Button ID="btnDelList" CssClass="BtnClass" OnClick="btnDelList_Click"
                                                     runat="server" Text="נקה רשימה" />
+                                                <br/>
+                                                <asp:Button ID="PDF" CssClass="BtnClass" OnClick="PDF_Click"
+                                                    runat="server" Text="PDF" />
                                                 <br/>
                                                 <asp:Label ID="lblSaveNewList" runat="server" Text=""></asp:Label>
                                             </div>
@@ -265,7 +268,7 @@
                 </div>
                 <!--  RightOfCenterPageDiv  -->
             </div>
-            <!---insideCenterDiv---->
+            <!-- insideCenterDiv -->
         </div>
         <!--  CentralPanelDiv  -->
     </div>
