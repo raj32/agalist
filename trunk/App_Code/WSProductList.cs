@@ -12,6 +12,11 @@ using System.Text;
 using System.IO;
 using PushSharp;
 using PushSharp.Android;
+using System.Xml;
+using System.Xml.XPath;
+using System.Xml.Serialization;
+using System.Xml.Linq;
+
 
 /// <summary>
 /// Summary description for WSProductList
@@ -140,60 +145,64 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
-
+    
     [WebMethod]
-    public int InsertStore(int userId,String store_name, float coordinate_x,float coordinate_y)
+    public XmlDocument ProductListXML(String product2letters)
     {
-
-        int result = 0;
+        String result;
+        List<string> str = new List<string>();
         try
         {
-            DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
+            str = myDBhandler.ProductListXml(product2letters).ToList<String>();
+        }
+        catch (Exception e)
+        {
+        }
+
+        result = "<Products>";
+
+        foreach (string itm in (str.ToArray()))
+        {
+            result = result + itm;
+        }
+
+        result = result + "</Products>";
+
+        XmlDocument xm = new XmlDocument();
+        xm.LoadXml(string.Format("<root>{0}</root>", result));
+
+        return xm;
+    }
+
+    [WebMethod]
+    public int AddProductToStore(int userId,int storeId,int productId,String productName,float price)
+    {
+        int result = 0;
+        int lProductId;
+        try
+        {
+            if (productId == 0) 
+            {
+                //checks if a product with same name already exists 
+                lProductId = DBUtils.getProductId(productName);
+
+                if (lProductId == 0)
+                {
+                    lProductId = myDBhandler.addProduct(productName);
+                }
+            }
+            else
+            {
+                lProductId=productId;
+            }
+
+            myDBhandler.addProductToStore(userId,storeId,lProductId,price);
+
         }
         catch (Exception e) { result = -2; }
 
         return result;
     }
-
-    [WebMethod]
-    public int UpdateStore(int userId, int store_id,String store_name, float coordinate_x, float coordinate_y)
-    {
-
-        int result = 0;
-        try
-        {
-            //   DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
-        }
-        catch (Exception e) { result = -2; }
-
-        return result;
-    }
-    [WebMethod]
-    public String StoreList(int userId)
-    {
-
-        String result = "";
-        try
-        {
-            //   DBHandler.GetInstance().InsertStore(userId, store_name, coordinate_x,coordinate_y);
-        }
-        catch (Exception e) { result = "ERR"; }
-
-        return result;
-    }
-
-    [WebMethod]
-    public int testheb(String stam)
-    {
-
-        int result = 0;
-        try
-        {
-            DBHandler.GetInstance().test_heb_proc(stam);
-        }
-        catch (Exception e) { result = -2; }
-
-        return result;
-    }
+    
 
 }

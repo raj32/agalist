@@ -34,13 +34,13 @@ public class WSStores : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public int InsertStore(int userId,String store_name, float coordinate_x,float coordinate_y)
+    public int InsertStore(int userId,String store_name, float coordinate_x,float coordinate_y,String address)
     {
 
         int result = 0;
         try
         {
-            myDBhandler.InsertStore(userId, store_name, coordinate_x, coordinate_y);
+            myDBhandler.InsertStore(userId, store_name, coordinate_x, coordinate_y,address);
         }
         catch (Exception e) { result = -2; }
 
@@ -48,13 +48,13 @@ public class WSStores : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public int UpdateStore(int userId, int store_id,String store_name, float coordinate_x, float coordinate_y)
+    public int UpdateStore(int userId, int storeId, String store_name, float coordinate_x, float coordinate_y, int active, String address)
     {
         int result = 0;
         
         try
         {
-            //myDBhandler.InsertStore(userId, store_name, coordinate_x, coordinate_y);
+            myDBhandler.UpdateStore(storeId,userId, store_name, coordinate_x, coordinate_y,active,address);
         }
         catch (Exception e) { result = -2; }
 
@@ -93,7 +93,53 @@ public class WSStores : System.Web.Services.WebService {
         return xm;
     }
 
-    
+    [WebMethod]
+    public int DeleteStore(int userId, int storeId)
+    {
+        int result = 0;
+
+        try
+        {
+            myDBhandler.DeleteStore(userId, storeId);
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+
+    [WebMethod]
+    public XmlDocument GetStore(int userId, int storeId)
+    {
+        String result;
+        List<string> str = new List<string>();
+        try
+        {
+            str = myDBhandler.getStore(userId, storeId).ToList<String>();
+        }
+        catch (Exception e)
+        {
+        }
+
+        result = "<Stores>";
+
+        foreach (string itm in (str.ToArray()))
+        {
+            result = result + itm;
+        }
+
+        result = result + "</Stores>";
+
+        XmlDocument xm = new XmlDocument();
+        xm.LoadXml(string.Format("<root>{0}</root>", result));
+
+        //        XDocument r = new XDocument("Stores",str.Select(x=>XElement.Parse(x)));
+
+        //        XmlDocument result = new XmlDocument();
+        //        result.Load(r.CreateReader());
+
+        return xm;
+    }
+
 
 /*    public XmlDocument GetEntityXml<String>()
 {
@@ -108,4 +154,5 @@ public class WSStores : System.Web.Services.WebService {
     }
     return xmlDoc;
     }*/
+
 }

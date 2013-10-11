@@ -115,6 +115,24 @@ namespace ProductListDBModel
             }
         }
 
+        /// <summary>
+        ///  Selecting distinct names of saved lists of the support
+        /// </summary>
+        /// <returns>Array of strings with support saved baskets.</returns>
+        public static int getProductId(string productname)
+        {
+            try
+            {
+                int myproduct = (from db in DBHandler.GetInstanceProp.Products where db.product_name == productname select db.product_id).First<int>();
+                return myproduct;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
         public static String getAllTips
         {
             get
