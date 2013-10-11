@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.IO;
+using System.Diagnostics;
 
 using ProductListDBModel;
 
@@ -376,9 +378,7 @@ public partial class TheMainListPage : System.Web.UI.Page
     protected void PDF_Click(object sender, EventArgs e)
     {
         PdfWriterAgalist pdfObj = new PdfWriterAgalist();
-
-        pdfObj.Test();
-
+        pdfObj.test();
 
     }
 }
