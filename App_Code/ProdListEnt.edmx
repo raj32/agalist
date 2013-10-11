@@ -143,12 +143,14 @@
           <Property Name="store_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="store_name" Type="nvarchar" MaxLength="50" />
           <Property Name="store_chain_id" Type="int" />
-          <Property Name="city_id" Type="int" />
-          <Property Name="street" Type="nchar" MaxLength="100" />
-          <Property Name="number" Type="int" />
           <Property Name="sector_id" Type="int" />
           <Property Name="coordinate_X" Type="float" />
           <Property Name="coordinate_y" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="active" Type="int" />
+          <Property Name="create_date" Type="date" />
+          <Property Name="updated_date" Type="date" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -242,12 +244,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="addProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productNAme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="addProductToStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="storeId" Type="int" Mode="In" />
+          <Parameter Name="productId" Type="int" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+        </Function>
+        <Function Name="DeleteStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="store_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="luser" Type="int" Mode="In" />
+          <Parameter Name="lstoreId" Type="int" Mode="In" />
+        </Function>
         <Function Name="InsertStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="store_name" Type="nvarchar" Mode="In" />
           <Parameter Name="coordinate_x" Type="float" Mode="In" />
           <Parameter Name="coordinate_y" Type="float" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ProductListXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productPart" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="registeruser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
@@ -303,6 +326,15 @@
           <Parameter Name="product_id" Type="int" Mode="In" />
           <Parameter Name="amount" Type="float" Mode="In" />
           <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StoreId" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="store_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="coordinate_x" Type="float" Mode="In" />
+          <Parameter Name="coordinate_y" Type="float" Mode="In" />
+          <Parameter Name="active" Type="int" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -362,17 +394,47 @@
             <Parameter Name="client_type" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="client_to_store_relations" EntityType="ProductListDBModel.client_to_store_relations" />
+          <FunctionImport Name="test_heb_proc">
+          <Parameter Name="parameter1" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="StoreList" ReturnType="Collection(String)">
+          <Parameter Name="luser" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteStore">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="store_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ProductListXml" ReturnType="Collection(String)">
+          <Parameter Name="productPart" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getStore" ReturnType="Collection(String)">
+            <Parameter Name="luser" Mode="In" Type="Int32" />
+            <Parameter Name="lstoreId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="InsertStore">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="store_name" Mode="In" Type="String" />
             <Parameter Name="coordinate_x" Mode="In" Type="Double" />
             <Parameter Name="coordinate_y" Mode="In" Type="Double" />
+            <Parameter Name="address" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="test_heb_proc">
-          <Parameter Name="parameter1" Mode="In" Type="String" />
+          <FunctionImport Name="UpdateStore">
+            <Parameter Name="StoreId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="store_name" Mode="In" Type="String" />
+            <Parameter Name="coordinate_x" Mode="In" Type="Double" />
+            <Parameter Name="coordinate_y" Mode="In" Type="Double" />
+            <Parameter Name="active" Mode="In" Type="Int32" />
+            <Parameter Name="address" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="StoreList" ReturnType="Collection(String)">
-            <Parameter Name="luser" Mode="In" Type="Int32" />
+          <FunctionImport Name="addProduct">
+          <Parameter Name="productNAme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addProductToStore">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="storeId" Mode="In" Type="Int32" />
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+            <Parameter Name="price" Mode="In" Type="Double" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="City">
@@ -571,12 +633,14 @@
           <Property Type="Int32" Name="store_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="store_name" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="store_chain_id" />
-          <Property Type="Int32" Name="city_id" />
-          <Property Type="String" Name="street" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Type="Int32" Name="number" />
           <Property Type="Int32" Name="sector_id" />
           <Property Type="Double" Name="coordinate_X" />
           <Property Type="Double" Name="coordinate_y" />
+          <Property Type="Int32" Name="user_id" />
+          <Property Type="Int32" Name="active" />
+          <Property Type="DateTime" Name="create_date" />
+          <Property Type="DateTime" Name="updated_date" />
+          <Property Type="String" Name="address" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="Product_in_storeProduct">
           <End Type="ProductListDBModel.Product_in_store" Role="Product_in_store" Multiplicity="*" />
@@ -725,12 +789,14 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="ProductListDBModel.Store">
               <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="coordinate_y" ColumnName="coordinate_y" />
                 <ScalarProperty Name="coordinate_X" ColumnName="coordinate_X" />
                 <ScalarProperty Name="sector_id" ColumnName="sector_id" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="city_id" ColumnName="city_id" />
                 <ScalarProperty Name="store_chain_id" ColumnName="store_chain_id" />
                 <ScalarProperty Name="store_name" ColumnName="store_name" />
                 <ScalarProperty Name="store_id" ColumnName="store_id" />
@@ -752,9 +818,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="InsertStore" FunctionName="ProductListDBModel.Store.InsertStore" />
           <FunctionImportMapping FunctionImportName="test_heb_proc" FunctionName="ProductListDBModel.Store.test_heb_proc" />
           <FunctionImportMapping FunctionImportName="StoreList" FunctionName="ProductListDBModel.Store.StoreList" />
+          <FunctionImportMapping FunctionImportName="DeleteStore" FunctionName="ProductListDBModel.Store.DeleteStore" />
+          <FunctionImportMapping FunctionImportName="ProductListXml" FunctionName="ProductListDBModel.Store.ProductListXml" />
+          <FunctionImportMapping FunctionImportName="getStore" FunctionName="ProductListDBModel.Store.getStore" />
+          <FunctionImportMapping FunctionImportName="InsertStore" FunctionName="ProductListDBModel.Store.InsertStore" />
+          <FunctionImportMapping FunctionImportName="UpdateStore" FunctionName="ProductListDBModel.Store.UpdateStore" />
+          <FunctionImportMapping FunctionImportName="addProduct" FunctionName="ProductListDBModel.Store.addProduct" />
+          <FunctionImportMapping FunctionImportName="addProductToStore" FunctionName="ProductListDBModel.Store.addProductToStore" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -822,7 +894,7 @@
         <EntityTypeShape EntityType="ProductListDBModel.sysdiagram" Width="1.5" PointX="2.875" PointY="8.25" Height="1.9802864583333317" />
         <EntityTypeShape EntityType="ProductListDBModel.Product_in_store" Width="1.5" PointX="4.375" PointY="4.75" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="ProductListDBModel.Sector" Width="1.5" PointX="6.375" PointY="6.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="ProductListDBModel.Store" Width="1.5" PointX="8.375" PointY="6.75" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="ProductListDBModel.Store" Width="1.5" PointX="8.375" PointY="6.75" Height="3.1340950520833335" />
         <AssociationConnector Association="ProductListDBModel.Product_in_storeProduct">
           <ConnectorPoint PointX="4.75" PointY="4.75" />
           <ConnectorPoint PointX="4.75" PointY="2.864889322916667" />
