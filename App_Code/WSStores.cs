@@ -15,6 +15,8 @@ using PushSharp.Android;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Serialization;
+using System.Xml.Linq;
+
 /// <summary>
 /// Summary description for WSProductList
 /// </summary>
@@ -61,21 +63,37 @@ public class WSStores : System.Web.Services.WebService {
     [WebMethod]
     public XmlDocument StoreList(int userId)
     {
-        XmlDocument result = new XmlDocument();
-//        List<string> str = new List<string>();
-        String str = " ";
+        String result;
+        List<string> str = new List<string>();
         try
         {
-            str = myDBhandler.StoreList(userId).First();
+            str = myDBhandler.StoreList(userId).ToList<String>();
         }
         catch (Exception e)
         {            
         }
-        result.LoadXml(str);
-        return result;
+
+        result = "<Stores>";
+
+        foreach (string itm in (str.ToArray()))
+        {
+            result = result + itm;
+        }
+
+        result = result + "</Stores>";
+
+        XmlDocument xm = new XmlDocument();
+        xm.LoadXml(string.Format("<root>{0}</root>", result));
+
+//        XDocument r = new XDocument("Stores",str.Select(x=>XElement.Parse(x)));
+
+//        XmlDocument result = new XmlDocument();
+//        result.Load(r.CreateReader());
+
+        return xm;
     }
 
-
+    
 
 /*    public XmlDocument GetEntityXml<String>()
 {
