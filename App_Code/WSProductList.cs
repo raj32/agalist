@@ -189,6 +189,7 @@ public class WSProductList : System.Web.Services.WebService {
                 if (lProductId == 0)
                 {
                     lProductId = myDBhandler.addProduct(productName);
+                    lProductId = DBUtils.getProductId(productName);
                 }
             }
             else
