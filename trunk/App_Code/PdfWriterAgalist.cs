@@ -29,7 +29,7 @@ public class PdfWriterAgalist
    myDocument.Open();
 
    // step 4: Now add some contents to the document
-   myDocument.Add(new Paragraph("BooooooBLICK SUCKS!!!!!!"));
+   myDocument.Add(new Paragraph("BooooooBLIC fgdfgdd"));
 
   }
   catch(DocumentException de) 
