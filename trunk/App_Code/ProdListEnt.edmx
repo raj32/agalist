@@ -253,6 +253,10 @@
           <Parameter Name="productId" Type="int" Mode="In" />
           <Parameter Name="price" Type="float" Mode="In" />
         </Function>
+        <Function Name="addProductToUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="productId" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeleteStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="store_id" Type="int" Mode="In" />
@@ -435,6 +439,10 @@
             <Parameter Name="storeId" Mode="In" Type="Int32" />
             <Parameter Name="productId" Mode="In" Type="Int32" />
             <Parameter Name="price" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="addProductToUser">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="City">
@@ -827,6 +835,7 @@
           <FunctionImportMapping FunctionImportName="UpdateStore" FunctionName="ProductListDBModel.Store.UpdateStore" />
           <FunctionImportMapping FunctionImportName="addProduct" FunctionName="ProductListDBModel.Store.addProduct" />
           <FunctionImportMapping FunctionImportName="addProductToStore" FunctionName="ProductListDBModel.Store.addProductToStore" />
+          <FunctionImportMapping FunctionImportName="addProductToUser" FunctionName="ProductListDBModel.Store.addProductToUser" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

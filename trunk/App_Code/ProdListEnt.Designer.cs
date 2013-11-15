@@ -809,6 +809,36 @@ namespace ProductListDBModel
     
             return base.ExecuteFunction("addProductToStore", userIdParameter, storeIdParameter, productIdParameter, priceParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userId">No Metadata Documentation available.</param>
+        /// <param name="productId">No Metadata Documentation available.</param>
+        public int addProductToUser(Nullable<global::System.Int32> userId, Nullable<global::System.Int32> productId)
+        {
+            ObjectParameter userIdParameter;
+            if (userId.HasValue)
+            {
+                userIdParameter = new ObjectParameter("userId", userId);
+            }
+            else
+            {
+                userIdParameter = new ObjectParameter("userId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter productIdParameter;
+            if (productId.HasValue)
+            {
+                productIdParameter = new ObjectParameter("productId", productId);
+            }
+            else
+            {
+                productIdParameter = new ObjectParameter("productId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("addProductToUser", userIdParameter, productIdParameter);
+        }
 
         #endregion
 

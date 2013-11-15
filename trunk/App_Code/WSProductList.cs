@@ -147,7 +147,7 @@ public class WSProductList : System.Web.Services.WebService {
     }
     
     [WebMethod]
-    public XmlDocument ProductListXML(String product2letters)
+    public XmlDocument searchProduct(String product2letters)
     {
         String result;
         List<string> str = new List<string>();
@@ -204,6 +204,36 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
-    
 
+    [WebMethod]
+    public int AddProductToUser(int userId, int productId, String productName)
+    {
+        int result = 0;
+        int lProductId;
+        try
+        {
+            if (productId == 0)
+            {
+                //checks if a product with same name already exists 
+                lProductId = DBUtils.getProductId(productName);
+
+                if (lProductId == 0)
+                {
+                    lProductId = myDBhandler.addProduct(productName);
+                    lProductId = DBUtils.getProductId(productName);
+                }
+            }
+            else
+            {
+                lProductId = productId;
+            }
+
+            myDBhandler.addProductToUser(userId, lProductId);
+
+        }
+        catch (Exception e) { result = -2; }
+
+        return result;
+    }
+    
 }

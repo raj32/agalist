@@ -12,7 +12,6 @@ public class PdfWriterAgalist
 {
  public void test() 
  {
-  Console.WriteLine("iText Demo");
 
   // step 1: creation of a document-object
   Document myDocument = new Document(PageSize.A4.Rotate());
@@ -31,6 +30,7 @@ public class PdfWriterAgalist
    // step 4: Now add some contents to the document
    myDocument.Add(new Paragraph("BooooooBLIC fgdfgdd"));
 
+   
   }
   catch(DocumentException de) 
   {
@@ -43,6 +43,8 @@ public class PdfWriterAgalist
 
   // step 5: Remember to close the documnet
 
+  
   myDocument.Close();
+
  }
 }

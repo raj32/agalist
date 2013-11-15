@@ -141,18 +141,5 @@ public class WSStores : System.Web.Services.WebService {
     }
 
 
-/*    public XmlDocument GetEntityXml<String>()
-{
-
-    XmlDocument xmlDoc = new XmlDocument();
-    
-    XPathNavigator nav = xmlDoc.CreateNavigator();
-    using (XmlWriter writer = nav.AppendChild())
-    {
-        XmlSerializer ser = new XmlSerializer(typeof(List<String>), new XmlRootAttribute("Store"));
-        ser.Serialize(writer, parameters);
-    }
-    return xmlDoc;
-    }*/
 
 }
