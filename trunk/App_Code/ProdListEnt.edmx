@@ -6,6 +6,21 @@
     <edmx:StorageModels>
     <Schema Namespace="ProductListDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ProductListDBModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="ProductListDBModel.Store.Categories" store:Type="Tables" store:Schema="dbo" store:Name="Categories">
+            <DefiningQuery>SELECT 
+      [Categories].[category_id] AS [category_id], 
+      [Categories].[category_name] AS [category_name], 
+      [Categories].[measure_id] AS [measure_id], 
+      [Categories].[insert_date] AS [insert_date], 
+      [Categories].[active] AS [active]
+      FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Category_connections" EntityType="ProductListDBModel.Store.Category_connections" store:Type="Tables" store:Schema="dbo" store:Name="Category_connections">
+            <DefiningQuery>SELECT 
+      [Category_connections].[father_category_id] AS [father_category_id], 
+      [Category_connections].[son_category_id] AS [son_category_id]
+      FROM [dbo].[Category_connections] AS [Category_connections]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Cities" EntityType="ProductListDBModel.Store.Cities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="client_to_store_relations" EntityType="ProductListDBModel.Store.client_to_store_relations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Clients" EntityType="ProductListDBModel.Store.Clients" store:Type="Tables" Schema="dbo" />
@@ -43,6 +58,30 @@
             <End Role="Tips" EntitySet="Tips" />
           </AssociationSet>
         </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'D:\PROJECTS\AGALISTDEV\APP_DATA\PRODUCTLISTDB.MDF.dbo.Categories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="measure_id" Type="int" />
+          <Property Name="insert_date" Type="date" />
+          <Property Name="active" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'D:\PROJECTS\AGALISTDEV\APP_DATA\PRODUCTLISTDB.MDF.dbo.Category_connections' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Category_connections">
+          <Key>
+            <PropertyRef Name="father_category_id" />
+            <PropertyRef Name="son_category_id" />
+          </Key>
+          <Property Name="father_category_id" Type="int" Nullable="false" />
+          <Property Name="son_category_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="city_id" />
@@ -247,6 +286,10 @@
         <Function Name="addProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productNAme" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="AddProductToCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parameter1" Type="int" Mode="In" />
+          <Parameter Name="parameter2" Type="int" Mode="In" />
+        </Function>
         <Function Name="addProductToStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="storeId" Type="int" Mode="In" />
@@ -272,6 +315,9 @@
           <Parameter Name="coordinate_x" Type="float" Mode="In" />
           <Parameter Name="coordinate_y" Type="float" Mode="In" />
           <Parameter Name="address" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="isexist_category" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parameter1" Type="int" Mode="In" />
         </Function>
         <Function Name="ProductListXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productPart" Type="nvarchar" Mode="In" />
@@ -443,6 +489,15 @@
           <FunctionImport Name="addProductToUser">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Categories" EntityType="ProductListDBModel.Category" />
+          <EntitySet Name="Category_connections" EntityType="ProductListDBModel.Category_connections" />
+          <FunctionImport Name="isexist_category">
+          <Parameter Name="parameter1" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddProductToCategory">
+            <Parameter Name="parameter1" Mode="In" Type="Int32" />
+            <Parameter Name="parameter2" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="City">
@@ -675,6 +730,24 @@
           <Property Type="DateTime" Name="create_date" />
           <Property Type="String" Name="comments" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <Property Type="String" Name="category_name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="measure_id" />
+          <Property Type="DateTime" Name="insert_date" />
+          <Property Type="Int32" Name="active" />
+        </EntityType>
+        <EntityType Name="Category_connections">
+          <Key>
+            <PropertyRef Name="father_category_id" />
+            <PropertyRef Name="son_category_id" />
+          </Key>
+          <Property Type="Int32" Name="father_category_id" Nullable="false" />
+          <Property Type="Int32" Name="son_category_id" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -836,6 +909,27 @@
           <FunctionImportMapping FunctionImportName="addProduct" FunctionName="ProductListDBModel.Store.addProduct" />
           <FunctionImportMapping FunctionImportName="addProductToStore" FunctionName="ProductListDBModel.Store.addProductToStore" />
           <FunctionImportMapping FunctionImportName="addProductToUser" FunctionName="ProductListDBModel.Store.addProductToUser" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ProductListDBModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="insert_date" ColumnName="insert_date" />
+                <ScalarProperty Name="measure_id" ColumnName="measure_id" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_connections">
+            <EntityTypeMapping TypeName="ProductListDBModel.Category_connections">
+              <MappingFragment StoreEntitySet="Category_connections">
+                <ScalarProperty Name="son_category_id" ColumnName="son_category_id" />
+                <ScalarProperty Name="father_category_id" ColumnName="father_category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="isexist_category" FunctionName="ProductListDBModel.Store.isexist_category" />
+          <FunctionImportMapping FunctionImportName="AddProductToCategory" FunctionName="ProductListDBModel.Store.AddProductToCategory" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -909,6 +1003,8 @@
           <ConnectorPoint PointX="4.75" PointY="2.864889322916667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="ProductListDBModel.client_to_store_relations" Width="1.5" PointX="0.75" PointY="6.5" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="ProductListDBModel.Category" Width="1.5" PointX="5.375" PointY="9.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="ProductListDBModel.Category_connections" Width="1.5" PointX="10.375" PointY="3.75" Height="1.4033821614583388" />
         </Diagram>
     </Diagrams>
   </Designer>

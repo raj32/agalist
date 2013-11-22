@@ -77,20 +77,20 @@ public class WSProductList : System.Web.Services.WebService {
         
     }
 
-    [WebMethod]
+ /*   [WebMethod]
     public int VerifyUser(string username, string password)
     {
         return DBUtils.getUserId(username, password);
-    }
+    }*/
 
-    [WebMethod]
+  /*  [WebMethod]
     public void SetUserRegId(String userId, String androidRegId)
     {
         int intUserId = Convert.ToInt16(userId);
         DBUtils.setUserRegId(intUserId, androidRegId);
     }
-
-    [WebMethod]
+    */
+ /*   [WebMethod]
     public void gcmPush()
     {
         var push = new PushBroker();
@@ -100,10 +100,10 @@ public class WSProductList : System.Web.Services.WebService {
                               .WithJson(@"{""alert"":""Hello World!"",""badge"":7,""sound"":""sound.caf""}"));
                                 
         push.StopAllServices();
-    }
+    }*/
 
 
-    [WebMethod] 
+/*    [WebMethod] 
     public int RegisterUser(String username, String password,int client_type)
     {
         int result = 0;
@@ -125,9 +125,9 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
-
+    */
     
-    [WebMethod]
+  /*  [WebMethod]
     public int PasswordReminder(String username)
     {
         int result = 0;
@@ -144,7 +144,7 @@ public class WSProductList : System.Web.Services.WebService {
         catch (Exception e) { result = -2; }
 
         return result;
-    }
+    }*/
     
     [WebMethod]
     public XmlDocument searchProduct(String product2letters)
@@ -235,5 +235,42 @@ public class WSProductList : System.Web.Services.WebService {
 
         return result;
     }
-    
+
+    [WebMethod]
+    public int AddProduct(String productName)
+    {
+        int lProductId;
+        try
+        {
+                //checks if a product with same name already exists 
+                lProductId = DBUtils.getProductId(productName);
+
+                if (lProductId == 0)
+                {
+                    lProductId = myDBhandler.addProduct(productName);
+                    lProductId = DBUtils.getProductId(productName);
+                }
+            
+        }
+        catch (Exception e) { lProductId = -2; }
+
+        return lProductId;
+    }
+
+    [WebMethod]
+    public int AddProductToCategory(int productId,int categoryId)
+    {
+        int Result;
+        try
+        {
+            if (myDBhandler.isexist_category(productId) != 0 && myDBhandler.isexist_category(categoryId) != 0)
+            {
+                myDBhandler.AddProductToCategory(categoryId, productId);
+            }
+        }
+        catch (Exception e) { Result = -2; }
+
+        return 0;
+    }
+   
 }
