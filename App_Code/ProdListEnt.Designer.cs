@@ -268,6 +268,38 @@ namespace ProductListDBModel
             }
         }
         private ObjectSet<client_to_store_relations> _client_to_store_relations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Category> Categories
+        {
+            get
+            {
+                if ((_Categories == null))
+                {
+                    _Categories = base.CreateObjectSet<Category>("Categories");
+                }
+                return _Categories;
+            }
+        }
+        private ObjectSet<Category> _Categories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Category_connections> Category_connections
+        {
+            get
+            {
+                if ((_Category_connections == null))
+                {
+                    _Category_connections = base.CreateObjectSet<Category_connections>("Category_connections");
+                }
+                return _Category_connections;
+            }
+        }
+        private ObjectSet<Category_connections> _Category_connections;
 
         #endregion
 
@@ -367,6 +399,22 @@ namespace ProductListDBModel
         public void AddToclient_to_store_relations(client_to_store_relations client_to_store_relations)
         {
             base.AddObject("client_to_store_relations", client_to_store_relations);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Categories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCategories(Category category)
+        {
+            base.AddObject("Categories", category);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Category_connections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCategory_connections(Category_connections category_connections)
+        {
+            base.AddObject("Category_connections", category_connections);
         }
 
         #endregion
@@ -839,6 +887,55 @@ namespace ProductListDBModel
     
             return base.ExecuteFunction("addProductToUser", userIdParameter, productIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="parameter1">No Metadata Documentation available.</param>
+        public int isexist_category(Nullable<global::System.Int32> parameter1)
+        {
+            ObjectParameter parameter1Parameter;
+            if (parameter1.HasValue)
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", parameter1);
+            }
+            else
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("isexist_category", parameter1Parameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="parameter1">No Metadata Documentation available.</param>
+        /// <param name="parameter2">No Metadata Documentation available.</param>
+        public int AddProductToCategory(Nullable<global::System.Int32> parameter1, Nullable<global::System.Int32> parameter2)
+        {
+            ObjectParameter parameter1Parameter;
+            if (parameter1.HasValue)
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", parameter1);
+            }
+            else
+            {
+                parameter1Parameter = new ObjectParameter("parameter1", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter parameter2Parameter;
+            if (parameter2.HasValue)
+            {
+                parameter2Parameter = new ObjectParameter("parameter2", parameter2);
+            }
+            else
+            {
+                parameter2Parameter = new ObjectParameter("parameter2", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("AddProductToCategory", parameter1Parameter, parameter2Parameter);
+        }
 
         #endregion
 
@@ -847,6 +944,245 @@ namespace ProductListDBModel
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ProductListDBModel", Name="Category")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Category : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Category object.
+        /// </summary>
+        /// <param name="category_id">Initial value of the category_id property.</param>
+        public static Category CreateCategory(global::System.Int32 category_id)
+        {
+            Category category = new Category();
+            category.category_id = category_id;
+            return category;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 category_id
+        {
+            get
+            {
+                return _category_id;
+            }
+            set
+            {
+                if (_category_id != value)
+                {
+                    Oncategory_idChanging(value);
+                    ReportPropertyChanging("category_id");
+                    _category_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("category_id");
+                    Oncategory_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _category_id;
+        partial void Oncategory_idChanging(global::System.Int32 value);
+        partial void Oncategory_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String category_name
+        {
+            get
+            {
+                return _category_name;
+            }
+            set
+            {
+                Oncategory_nameChanging(value);
+                ReportPropertyChanging("category_name");
+                _category_name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("category_name");
+                Oncategory_nameChanged();
+            }
+        }
+        private global::System.String _category_name;
+        partial void Oncategory_nameChanging(global::System.String value);
+        partial void Oncategory_nameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> measure_id
+        {
+            get
+            {
+                return _measure_id;
+            }
+            set
+            {
+                Onmeasure_idChanging(value);
+                ReportPropertyChanging("measure_id");
+                _measure_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("measure_id");
+                Onmeasure_idChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _measure_id;
+        partial void Onmeasure_idChanging(Nullable<global::System.Int32> value);
+        partial void Onmeasure_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> insert_date
+        {
+            get
+            {
+                return _insert_date;
+            }
+            set
+            {
+                Oninsert_dateChanging(value);
+                ReportPropertyChanging("insert_date");
+                _insert_date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("insert_date");
+                Oninsert_dateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _insert_date;
+        partial void Oninsert_dateChanging(Nullable<global::System.DateTime> value);
+        partial void Oninsert_dateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> active
+        {
+            get
+            {
+                return _active;
+            }
+            set
+            {
+                OnactiveChanging(value);
+                ReportPropertyChanging("active");
+                _active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("active");
+                OnactiveChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _active;
+        partial void OnactiveChanging(Nullable<global::System.Int32> value);
+        partial void OnactiveChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="ProductListDBModel", Name="Category_connections")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Category_connections : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Category_connections object.
+        /// </summary>
+        /// <param name="father_category_id">Initial value of the father_category_id property.</param>
+        /// <param name="son_category_id">Initial value of the son_category_id property.</param>
+        public static Category_connections CreateCategory_connections(global::System.Int32 father_category_id, global::System.Int32 son_category_id)
+        {
+            Category_connections category_connections = new Category_connections();
+            category_connections.father_category_id = father_category_id;
+            category_connections.son_category_id = son_category_id;
+            return category_connections;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 father_category_id
+        {
+            get
+            {
+                return _father_category_id;
+            }
+            set
+            {
+                if (_father_category_id != value)
+                {
+                    Onfather_category_idChanging(value);
+                    ReportPropertyChanging("father_category_id");
+                    _father_category_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("father_category_id");
+                    Onfather_category_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _father_category_id;
+        partial void Onfather_category_idChanging(global::System.Int32 value);
+        partial void Onfather_category_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 son_category_id
+        {
+            get
+            {
+                return _son_category_id;
+            }
+            set
+            {
+                if (_son_category_id != value)
+                {
+                    Onson_category_idChanging(value);
+                    ReportPropertyChanging("son_category_id");
+                    _son_category_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("son_category_id");
+                    Onson_category_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _son_category_id;
+        partial void Onson_category_idChanging(global::System.Int32 value);
+        partial void Onson_category_idChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
